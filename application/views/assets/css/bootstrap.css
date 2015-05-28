@@ -6802,3 +6802,6 @@ a.list-group-item-danger.active:focus {
 .popover-title {
   border: none;
 }
+.bgimg {
+    background-image: url('C:\xampp\htdocs\cke\application\views\Untitled.png');
+}
