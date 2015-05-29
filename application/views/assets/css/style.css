@@ -43,3 +43,6 @@ h4{
 	background-color:#A9D0F5;
 	margin-bottom:auto;
 }
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
