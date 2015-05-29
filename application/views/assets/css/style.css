@@ -5,6 +5,9 @@
 	height: auto;
 	
 	}
+.backgroundgrey{
+	background-color:#F0F0F5;
+}
 h1{
 	font-weight:bold;
 	font-family:Verdana;
@@ -34,6 +37,9 @@ h4{
     margin-right: auto;
 	width:20%;
 }
-#foot{
+.foot{
 	font-size:100%;
+	margin-top:30px;
+	background-color:#A9D0F5;
+	margin-bottom:auto;
 }
