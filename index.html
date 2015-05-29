@@ -114,18 +114,18 @@
             <h1 class="text-primary"><b>Our Value</b></h1>
         </div>
         <div class="col-md-4">
-			<img id="icon" src="Pictures\light.png">
+			<img class="icon" src="Pictures\light.png">
 			<h4 class="text-info">Education and lifelong learning</h4>
             <p>Several studies suggest a positive link between taking part in sport and academic achievement.</p>
         </div>
 		<div class="col-md-4">
-			<img id="icon" src="Pictures\light.png">
+			<img class="icon" src="Pictures\light.png">
 			<h4 class="text-info" >Crime reduction and community safety</h4>
             <p>Sport programmes aimed at youths at risk of criminal behaviour can
 				enhance self-esteem and reduce reoffending.</p>
         </div>
         <div class="col-md-4">
-		<img id="icon" src="Pictures\light.png">
+		<img class="icon" src="Pictures\light.png">
 			<h4 class="text-info">Social capacity and cohesion</h4>
             <p>Sports programmes have the potential to strengthen social networks and community identity.</p>
         </div>
@@ -133,10 +133,15 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="text-primary">Gym Space</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
+            <div class="cycle-slideshow" data-cycle-speed="600" data-cycle-manual-speed="100">
+                <img class="ourspace" src="Pictures\gym-room-images\1.jpg">
+                <img class="ourspace" src="Pictures\gym-room-images\2.jpg">
+				<img class="ourspace" src="Pictures\gym-room-images\3.jpg">
+				<img class="ourspace" src="Pictures\gym-room-images\4.jpg">
+				<img class="ourspace" src="Pictures\gym-room-images\5.jpg">
+				<img class="ourspace" src="Pictures\gym-room-images\6.jpg">
+				<img class="ourspace" src="Pictures\gym-room-images\7.jpg">
+			</div>
         </div>
 	</div>	
     <div class="row backgroundgrey">
@@ -144,19 +149,19 @@
                     <h1 class="text-primary">Contact us</h1>
                 </div>
                 <div class="col-md-4">
-                    <img id="icon" src="Pictures\phone.png"><br>
+                    <img class="icon" src="Pictures\phone.png"><br>
                     <p>
 					(+39) 324 123 456
 					</p>
                 </div>
                 <div class="col-md-4">
-				<img id="icon" src="Pictures\home.png">
+				<img class="icon" src="Pictures\home.png">
 				<br><p>Piazza Leonardo da Vinci, 32
 							20133 Milano 
 								Italy</p>
                 </div>
                 <div class="col-md-4">
-                    <img id="icon" src="Pictures\E-mail.png"><br>
+                    <img class="icon" src="Pictures\E-mail.png"><br>
                     <p>contact@biggym.it</p>
                 </div>
             </div>
@@ -170,7 +175,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
-
+	<script src="assets/js/jquery.cycle2.min.js"></script>
+    <script type="text/javascript">
+        $('.cycle-slideshow').cycle({
+            speed: 600,
+            manualSpeed: 100
+        });
+    </script>
 
 </body>
 </html>
