@@ -11,7 +11,8 @@ class Instructor extends CI_Controller
 	
 	
 	function index(){
-		echo 'index';
+		echo '<h1>aaaa</h1>';
+		//print json_encode('"asdf"');
 	}
 	
 	/*

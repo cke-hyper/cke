@@ -5,7 +5,9 @@
 <script>
 $(document).ready(function(){
 
-        $("#div1").load("http://localhost/cke/index.php/page");
+	//$("button").click(function(){
+        $("#div1").load("http://localhost/cke/index.php/instructor");
+    //});
     
 });
 </script>
@@ -13,7 +15,7 @@ $(document).ready(function(){
 <body>
 
 <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
-
+asdfg
 <button>Get External Content</button>
 
 </body>
