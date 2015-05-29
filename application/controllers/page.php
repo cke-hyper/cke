@@ -13,10 +13,10 @@ class Page extends CI_Controller {
 	 * for the purpuse of test : base_url() + index.php/instructor/get_instructors
 	 * return the json type of data
 	 */
-	function get_page($page_content = "our_gym") {
-		$data ['rows'] = $this->page_model->get_page ( $page_content );
+	function get_page($page_id = 1) {
+		$data ['rows'] = $this->page_model->get_page ( $page_id );
 		// $data ['cardinality'] = $this->teaches_1_model->get_all();
-		foreach ( $this->page_model->get_page ( $page_content ) as $row ) {
+		foreach ( $this->page_model->get_page ( $page_id ) as $row ) {
 			echo $row->page_content;
 		}
 	}

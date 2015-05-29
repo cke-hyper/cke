@@ -33,10 +33,10 @@ Class Page_model extends CI_Model
 	 * sql: select * from page where page_name = $page_name 
 	 * return the row
 	 */
-	public function get_page($page_name){
+	public function get_page($page_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
-		$this->db->where('page_name', $page_name);
+		$this->db->where('page_id', $page_id);
 		$query = $this->db->get();
 		return $query->result();
 	}
