@@ -9,8 +9,11 @@
 
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Our CSS file -->
-	<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- Our CSS file -->
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- Icon -->
+    <link rel="stylesheet" href="assets\font-awesome-4.3.0\css\font-awesome.min.css">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,32 +21,31 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<script
-src="http://maps.googleapis.com/maps/api/js">
-</script>
+    <script
+            src="http://maps.googleapis.com/maps/api/js">
+    </script>
 
-<script>
-	var myCenter=new google.maps.LatLng(45.478635,9.228206);
+    <script>
+        var myCenter = new google.maps.LatLng(45.475324,9.249217);
 
-	function initialize()
-	{
-	var mapProp = {
-	center:myCenter,
-	zoom:15,
-	mapTypeId:google.maps.MapTypeId.ROADMAP
-	};
+        function initialize() {
+            var mapProp = {
+                center: myCenter,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
-	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-	var marker=new google.maps.Marker({
-	position:myCenter,
-	});
+            var marker = new google.maps.Marker({
+                position: myCenter,
+            });
 
-	marker.setMap(map);
-}
+            marker.setMap(map);
+        }
 
-	google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 
 </head>
 <body>
@@ -101,43 +103,64 @@ src="http://maps.googleapis.com/maps/api/js">
     <!-- /.container-fluid -->
 </nav>
 <div class="container-fluid">
-	<div class="row" >
-		<div class="col-md-4">
-			<h1 align="center">Address</h1>
-			 <img class="icon" src="Pictures\home.png">
-				<br><p>Piazza Leonardo da Vinci, 32
-							20133 Milano 
-								Italy</p>
-		</div>
-		<h1 align="center">MAP</h1>
-        <div class="col-md-8" >
-			<div id="googleMap"></div>
-			 
-		</div>
-        
-    </div>
-	<div class="row" >
-		<div class="col-md-8">
-			<h1>How to get there </h1>
-			 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.</p>
-             <p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-		</div>
+    <div class="row backgroundgrey">
         <div class="col-md-4">
-			<h1>MAP</h1>
-			 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.</p>
-             <p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-		</div>
-        
-    </div>
- 
-    <footer>
-        <p>All right reserved for BigGym</p>
+            <h1 align="center">Address</h1>
+            <img class="icon" src="Pictures\home.png">
+            <br>
 
-        <p>Created by Ergun, Chen and Kaabi</p>
+            <p>Via Riccardo Pitteri, 56
+                20134 Milano
+                Italy</p>
+        </div>
+        <h1 align="center">MAP</h1>
+
+        <div class="col-md-8">
+            <div id="googleMap"></div>
+
+        </div>
+
+    </div>
+    <div class="row ">
+        <div class="col-md-8">
+            <h1>How to get there </h1>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <p class="text-info" style="margin-top: 10%;text-align: center;"> From Central station</p>
+                </div>
+                <div class="col-md-7">
+                    <p class="trans-text">
+                        <i class="fa fa-train fa-2x"></i>
+
+                        Line 2(Green) to Piola Station</p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-5">
+                    <p class="text-info" style="margin-top: 10%;text-align: center;"> From Lambrate station</p>
+                </div>
+                <div class="col-md-7">
+                            <p class="trans-text"><i class="fa fa-train fa-2x"></i>
+                                Line 2(Green)to Piola Station</p>
+                            <p class="trans-text">
+                                <i class="fa fa-subway fa-2x"></i> 23 to Piazza Leonardo da Vinci</p>
+                            <p class="trans-text">
+                                <i class="fa fa-bus fa-2x"></i> 93 to Piazza Leonardo da Vinci</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="align-content: center">
+            <img src="Pictures\metro.jpg" id="metro">
+        </div>
+
+    </div>
+
+    <footer>
+        <p class="foot">Copyright for BigGym <br>Created by Ergun, Chen and Kaabi</p>
     </footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
