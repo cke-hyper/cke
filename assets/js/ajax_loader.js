@@ -1,5 +1,5 @@
 function getContent(page_name) {
-    $('#page_content').load('http://localhost/cke/index.php/page/get_page/' + page_name);
+    $('#page_content').load('http://localhost/cke/index.php/Page/get_page/' + page_name);
 }
 
 /**
@@ -26,5 +26,6 @@ $(document).ready(function () {
             $(".nav li:nth-child(8)").addClass('active');
         }
         $(this).addClass('active');
+        getContent(index+1);
     });
 });
