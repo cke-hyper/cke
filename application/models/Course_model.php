@@ -79,6 +79,7 @@ Class Course_model extends CI_Model
 	public function get_course_by_level($order="level", $direction="ASC"){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->join('course_category', "course_category.category_id = $this->TABLENAME.belongs_to");
 		$this->db->order_by($order, $direction);
 		$query = $this->db->get();
 		return $query->result();

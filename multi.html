@@ -162,16 +162,6 @@ var $base_url = "http://localhost/cke/index.php/";
 						$divs = $('<div class="row">').append($onecolumn).append($first).append($second);
 						$('#info').append($divs);
 					}
-					
-					//alert(data.rows[0]["course_name"]);
-// 					for (i = 0; i < data.rows.length; i++){
-// 						var $course_id = $('<h1>').text(data.rows[i].course_id);
-// 						var $course_name = $('<h1>').text(data.rows[i].course_name);
-// 						var $description = $('<p>').text(data.rows[i].description);
-// 						var $category_name = $('<p>').text(data.rows[i].category_name);
-// 						var $level = $('<p>').text(data.rows[i].level);
-// 						$('#info').append($course_id).append($course_name).append($description).append($category_name).append($level);					
-// 					}
 				},
 				type : 'GET'
 			});
@@ -189,52 +179,37 @@ var $base_url = "http://localhost/cke/index.php/";
 				},
 				dataType : 'json',
 				success : function(data) {
+					//clear the html code
+					$('#info').html("");
+					var $full_name;
+					var $bio;
 					for (i = 0; i < data.rows.length; i++){
-						var $course_id = $('<h1>').text(data.rows[i].course_id);
-						var $course_name = $('<h1>').text(data.rows[i].course_name);
-						var $description = $('<p>').text(data.rows[i].description);
-						var $category_name = $('<p>').text(data.rows[i].category_name);
-						var $level = $('<p>').text(data.rows[i].level);
-						$('#info').append($course_id).append($course_name).append($description).append($category_name).append($level);					
+						var $temp ='<img src="Pictures/ins-img/' + data.rows[i].course_id+ '.jpg">';
+						$img = $($temp);
+						$onecolumn = $('<div class="col-md-1">').text(" ");
+						$first = $('<div class="col-md-5">').append($img);
+						$course_name = $('<h1>').text(data.rows[i].full_name);
+						//here using substring cut the long bio to small one to fit the front page
+						$temp = '<a onClick="get_course('+ data.rows[i].course_id +')" href="#">';
+						$link = $($temp).text("More");
+						$DESCRIPTION = $('<h4>').text("DESCRIPTION");
+						$description = $('<p>').text(data.rows[i].description.substring(0,800) + "... ").append($link);	
+						$COURSESC = $('<b>').text("COURSE CATEGORY: ");
+						var $course_categories;
+						$course_categories = $('<div class="link-separator">').append($COURSESC);
+						var $temp = '<a onClick="get_category('+ data.rows[i].category_id +')" href="#">';
+						$category_link = $($temp).text(data.rows[i].category_name);
+						$course_categories.append($category_link);
+						$second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories);
+						$divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+						$('#info').append($divs);
 					}
 				},
 				type : 'GET'
 			});
 		});
 		
-		$("#course").click(function() {
-			$.ajax({
-				url : $base_url + 'course/get_course/1',
-				data : {
-					format : 'json'
-				},
-				error: function(xhr,err) {
-					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-					$('#info').append("responseText: "+xhr.responseText)
-				},
-				dataType : 'json',
-				success : function(data) {
-					var $course_name = $('<h1>').text(data.rows[0].course_name);
-					var $description = $('<p>').text(data.rows[0].description);
-					var $category_name = $('<p>').text(data.rows[0].category_name);
-					var $level = $('<p>').text(data.rows[0].level);
-					$('#info').append($course_name).append($description).append($level);
-					for(i=0; i < data.instructor_cardinality.length; i++)
-					{
-						var $instructor_id = $('<p>').text(data.instructor_cardinality[i].instructor_id);
-						var $full_name = $('<p>').text(data.instructor_cardinality[i].full_name);
-						$('#info').append($instructor_id).append($full_name);
-					}
-					for(i=0; i < data.course_category_cardinality.length; i++)
-					{
-						var $category_id = $('<p>').text(data.course_category_cardinality[i].category_id);
-						var $category_name = $('<p>').text(data.course_category_cardinality[i].category_name);
-						$('#info').append($category_id).append($category_name);
-					}
-				},
-				type : 'GET'
-			});
-		});
+		
 		
 		$("#course_categories").click(function() {
 			$.ajax({
@@ -248,42 +223,25 @@ var $base_url = "http://localhost/cke/index.php/";
 				},
 				dataType : 'json',
 				success : function(data) {
+					//clear the html code
+					$('#info').html("");
+					var $category_name;
+					var $about;
 					for (i = 0; i < data.rows.length; i++){
-						var $category_id = $('<h1>').text(data.rows[i].category_id);
-						var $category_name = $('<h1>').text(data.rows[i].category_name);
-						var $about = $('<p>').text(data.rows[i].about);
-						$('#info').append($category_id).append($category_name).append($about);					
-					}
-				},
-				type : 'GET'
-			});
-		});
-		
-		$("#course_category").click(function() {
-			$.ajax({
-				url : $base_url + 'course_category/get_course_category/1',
-				data : {
-					format : 'json'
-				},
-				error: function(xhr,err) {
-					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-					$('#info').append("responseText: "+xhr.responseText)
-				},
-				dataType : 'json',
-				success : function(data) {
-					var $category_id = $('<h1>').text(data.rows[0].category_id);
-					var $category_name = $('<h1>').text(data.rows[0].category_name);
-					var $about = $('<p>').text(data.rows[0].about);
-					$('#info').append($category_id).append($category_name).append($about);	
-					for (i = 0; i < data.instrcutor_cardinality.length; i++){
-						var $instructor_id = $('<h1>').text(data.instrcutor_cardinality[i].instructor_id);
-						var $full_name = $('<h1>').text(data.instrcutor_cardinality[i].full_name);
-						$('#info').append($instructor_id).append($full_name);					
-					}
-					for (i = 0; i < data.course_cardinality.length; i++){
-						var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
-						var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
-						$('#info').append($course_id).append($course_name);					
+						var $temp ='<img src="Pictures/ins-img/' + data.rows[i].category_id+ '.jpg">';
+						$img = $($temp);
+						$onecolumn = $('<div class="col-md-1">').text(" ");
+						$first = $('<div class="col-md-5">').append($img);
+						$category_name = $('<h1>').text(data.rows[i].category_name);
+						//here using substring cut the long bio to small one to fit the front page
+						$temp = '<a onClick="get_category('+ data.rows[i].category_id +')" href="#">';
+						$link = $($temp).text("More");
+						$DESCRIPTION = $('<h5>').text("DESCRIPTION");
+						$about = $('<p>').text(data.rows[i].about.substring(0,800) + "... ").append($link);						
+						
+						$second = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about);
+						$divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+						$('#info').append($divs);
 					}
 				},
 				type : 'GET'
@@ -307,64 +265,30 @@ var $base_url = "http://localhost/cke/index.php/";
 						var $room_name = $('<h1>').text(data.rows[i].room_name);
 						$('#info').append($room_id).append($room_name);					
 					}
-				},
-				type : 'GET'
-			});
-		});
-		
-		$("#room").click(function() {
-			$.ajax({
-				url : $base_url + 'room/get_room/1',
-				data : {
-					format : 'json'
-				},
-				error: function(xhr,err) {
-					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-					$('#info').append("responseText: "+xhr.responseText)
-				},
-				dataType : 'json',
-				success : function(data) {
-					var $room_id = $('<h1>').text(data.rows[0].room_id);
-					var $room_name = $('<h1>').text(data.rows[0].room_name);
-					$('#info').append($room_id).append($room_name);
-					for (i = 0; i < data.course_cardinality.length; i++){
-						var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
-						var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
-						$('#info').append($course_id).append($course_name);					
+					//clear the html code
+					$('#info').html("");
+					var $category_name;
+					var $about;
+					for (i = 0; i < data.rows.length; i++){
+						var $temp ='<img src="Pictures/ins-img/' + data.rows[i].room_id+ '.jpg">';
+						$img = $($temp);
+						$onecolumn = $('<div class="col-md-1">').text(" ");
+						$second = $('<div class="row">').append($img);
+						$room_name = $('<h1>').text(data.rows[i].room_name);
+						$temp = '<a onClick="get_room('+ data.rows[i].room_id +')" href="#">';
+						$link = $($temp).text("Detailed");
+						$first = $('<div class="row">').append($room_name).append($link);
+						$divs = $('<div class="col-md-5">').append($onecolumn).append($first).append($second);
+						$('#info').append($onecolumn).append($divs);
 					}
 				},
 				type : 'GET'
 			});
 		});
-		//end of #room
 		
-	});
 	
-	function get_room($room_id){	
-		var $url = $base_url + 'room/get_room/'+$room_id;
-		$.ajax({
-			url : $url,
-			data : {
-				format : 'json'
-			},
-			error: function(xhr,err) {
-				$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-				$('#info').append("responseText: "+xhr.responseText)
-			},
-			dataType : 'json',
-			success : function(data) {
-				var $room_id = $('<h1>').text(data.rows[0].room_id);
-				var $room_name = $('<h1>').text(data.rows[0].room_name);
-				$('#info').append($room_id).append($room_name);
-				for (i = 0; i < data.course_cardinality.length; i++){
-					var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
-					var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
-					$('#info').append($course_id).append($course_name);					
-				}
-			},
-			type : 'GET'
-		});
-	}
+	//end of document ready	
+	});
 	
 	function get_instructor($instructor_id){	
 		var $url = $base_url + 'instructor/get_instructor/'+$instructor_id;
@@ -384,9 +308,7 @@ var $base_url = "http://localhost/cke/index.php/";
 				$img = $($temp);
 				$onecolumn = $('<div class="col-md-1">').text(" ");
 				$first = $('<div class="col-md-5">').append($img);
-				$full_name = $('<h1>').text(data.rows[0].full_name);
-				//here using substring cut the long bio to small one to fit the front page
-				$temp = '<a onClick="get_instructor('+ data.rows[0].instructor_id +')" href="#">';	
+				$full_name = $('<h1>').text(data.rows[0].full_name);	
 				$BIOGRAPHY = $('<h4>').text("BIOGRAPHY");
 				$bio = $('<p>').text(data.rows[0].bio);	
 				$COURSE_CATEGORY = $('<h4>').text("COURSE CATEGORY");
@@ -399,9 +321,10 @@ var $base_url = "http://localhost/cke/index.php/";
 					//alert($category_name);
 					$course_categories.append($category_name);			
 				}
+				
+				//course cardinality
 				$COURSE = $('<h4>').text("COURSE");
 				var $courses = $('<div>');
-				//course cardinality
 				for (i = 0; i < data.course_cardinality.length; i++){
 					var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
 					var $temp = '<a onClick="get_course('+ $course_id +')">';
@@ -432,7 +355,6 @@ var $base_url = "http://localhost/cke/index.php/";
 			},
 			dataType : 'json',
 			success : function(data) {
-				console.log(data);
 				$('#info').html("");
 				var $course_name = $('<h1>').text(data.rows[0].course_name);
 				var $description = $('<div class="row">').text(data.rows[0].description);
@@ -477,45 +399,118 @@ var $base_url = "http://localhost/cke/index.php/";
 				var $fourthrow = $('<div class="col-md-6">').append($img);
 				
 				$('#info').append($firstrow).append($secondrow).append($thirdrow).append($fourthrow);
-// 				var $temp ='<img src="Pictures/ins-img/' + data.rows[0].course_id+ '.jpg">';
-// 				$img = $($temp);
-// 				$onecolumn = $('<div class="col-md-1">').text(" ");
-// 				$first = $('<div class="col-md-5">').append($img);
-// 				$full_name = $('<h1>').text(data.rows[0].full_name);
-// 				//here using substring cut the long bio to small one to fit the front page
-// 				$temp = '<a onClick="get_instructor('+ data.rows[0].instructor_id +')" href="#">';	
-// 				$BIOGRAPHY = $('<h4>').text("BIOGRAPHY");
-// 				$bio = $('<p>').text(data.rows[0].bio);	
-// 				$COURSE_CATEGORY = $('<h4>').text("COURSE CATEGORY");
-// 				var $course_categories = $('<div>');
-// 				//course categories cardination
-// 				for (i = 0; i < data.course_categories_cardinality.length; i++){
-// 					var $category_id = $('<h1>').text(data.course_categories_cardinality[i].category_id);
-// 					var $temp = '<a onClick="get_course_category('+ $category_id +')">';
-// 					var $category_name = $($temp).text(data.course_categories_cardinality[i].category_name);
-// 					//alert($category_name);
-// 					$course_categories.append($category_name);			
-// 				}
-// 				$COURSE = $('<h4>').text("COURSE");
-// 				var $courses = $('<div>');
-// 				//course cardinality
-// 				for (i = 0; i < data.course_cardinality.length; i++){
-// 					var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
-// 					var $temp = '<a onClick="get_course('+ $course_id +')">';
-// 					var $course_name = $($temp).text(data.course_cardinality[i].course_name);
-// 					//alert($category_name);
-// 					$courses.append($course_name);			
-// 				}
-				
-// 				$second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio).append($COURSE_CATEGORY).append($course_categories).append($COURSE).append($courses);
-// 				$divs = $('<div class="row">').append($onecolumn).append($first).append($second);
-// 				$('#info').append($divs);
-			
 			},
 			type : 'GET'
 		});
 	}
 	
+	function get_category($category_id){	
+		var $url = $base_url + 'course_category/get_course_category/'+$category_id;
+		$.ajax({
+			url : $url,
+			data : {
+				format : 'json'
+			},
+			error: function(xhr,err) {
+				$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				$('#info').append("responseText: "+xhr.responseText)
+			},
+			dataType : 'json',
+			success : function(data) {
+				$('#info').html("");
+				var $temp ='<img src="Pictures/ins-img/' + data.rows[0].category_id+ '.jpg">';
+				var $img = $($temp);
+				var $onecolumn = $('<div class="col-md-1">').text(" ");
+				var $firstcolumn = $('<div class="col-md-5">').append($img);
+				var $category_name = $('<h1>').text(data.rows[0].category_name);
+				var $DESCRIPTION = $('<h4>').text("DESCRIPTION");
+				var $about = $('<p>').text(data.rows[0].about);	
+				//instructor cardinality
+				var $INSTRUCTOR = $('<b>').text("INSTRUCTOR: ");
+				var $instructor=$('<div class="link-separator row">').append($INSTRUCTOR);
+				for (i = 0; i < data.instructor_cardinality.length; i++)
+				{
+					//alert(data.instructor_cardinality[i].full_name);
+ 					var $temp = '<a onclick="get_instructor('+ data.instructor_cardinality[i].instructor_id +')" href="#">';
+ 					$instructor.append($($temp).text(data.instructor_cardinality[i].full_name));
+				}
+				
+				//course cardinality
+				$COURSE = $('<b>').text("COURSE: ");
+				var $courses = $('<div class="link-separator row">').append($COURSE);
+				for (i = 0; i < data.course_cardinality.length; i++){
+					var $temp = '<a onClick="get_course('+ data.course_cardinality[i].course_id +')">';
+					$courses.append($($temp).text(data.course_cardinality[i].course_name));			
+				}
+				
+				var $secondcolumn = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about).append($instructor).append($courses);	
+				var $firstrow = $('<div class="row">').append($onecolumn).append($firstcolumn).append($secondcolumn);
+				
+				var $secondrow = $('<div calss="row">').append($('<h1>').text("VIDEO of origin"));
+				
+				var $GOOD_FOR = $('<h1>').text('WHY IS GOOD?');
+				var $good_for = $('<div class="row">').text(data.rows[0].good_for);
+				var $firstcolumn = $('<div class="col-md-5">').append($GOOD_FOR).append($good_for);
+				var $PRACTICE = $('<h1>').text('WHO IS GOOD TO PRACTICE?');
+				var $practices = $('<div class="row">').text(data.rows[0].practices);
+				var $secondcolumn = $('<div class="col-md-5">').append($PRACTICE).append($practices);
+				var $thirdrow = $('<div class="row">').append($firstcolumn).append($secondcolumn);
+				$('#info').append($firstrow).append($secondrow).append($thirdrow).append($fourthrow);
+				
+			},
+			type : 'GET'
+		});
+	}
+	
+	
+	function get_room($room_id){	
+		var $url = $base_url + 'room/get_room/'+$room_id;
+		$.ajax({
+			url : $url,
+			data : {
+				format : 'json'
+			},
+			error: function(xhr,err) {
+				$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				$('#info').append("responseText: "+xhr.responseText)
+			},
+			dataType : 'json',
+			success : function(data) {
+				var $room_id = $('<h1>').text(data.rows[0].room_id);
+				var $room_name = $('<h1>').text(data.rows[0].room_name);
+				$('#info').append($room_id).append($room_name);
+				for (i = 0; i < data.course_cardinality.length; i++){
+					var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
+					var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
+					$('#info').append($course_id).append($course_name);					
+				}
+				
+				$('#info').html("");
+				var $temp ='<img src="Pictures/ins-img/' + data.rows[0].room_id+ '.jpg">';
+				var $img = $($temp);
+				var $onecolumn = $('<div class="col-md-1">').text(" ");
+				var $secondcolumn = $('<div class="col-md-5">').append($img);
+				var $room_name = $('<h1>').text(data.rows[0].room_name);
+				
+				//course cardinality
+				var $COURSE = $('<b>').text("COURSE: ");
+				var $courses = $('<div class="link-separator row">').append($COURSE);
+				for (i = 0; i < data.course_cardinality.length; i++){
+					var $temp = '<a onClick="get_course('+ data.course_cardinality[i].course_id +')">';
+					$courses.append($($temp).text(data.course_cardinality[i].course_name));			
+				}
+				var $firstcolumn = $('<div class="col-md-5">').append($room_name).append($courses);
+				var $firstrow = $('<div class="row">').append($onecolumn).append($firstcolumn).append($secondcolumn);
+				
+				var $secondrow =$('<div class="row">').append($('<h1>').text("WAIT FOR PICS"));
+				
+				var $thirdrow =$('<div class="row">').append($('<h1>').text("GMAP")).append(data.rows[0].coord_x).append(' ').append(data.rows[0].coord_y);
+				
+				$('#info').append($firstrow).append($secondrow).append($thirdrow);
+			},
+			type : 'GET'
+		});
+	}
 	
 </script>
 </head>
@@ -523,12 +518,9 @@ var $base_url = "http://localhost/cke/index.php/";
 
 	<button id="instructors">instructors</button>
 	<button id="instructors_month">instructors_month</button>
-	<button id="instructor">instructor</button>
 	<button id="courses_alphabet">courses_alphabet</button>
 	<button id="courses_level">courses_level</button>
-	<button id="course">course</button>
 	<button id="course_categories">course_categories</button>
-	<button id="course_category">course_category</button>
 	<button id="rooms">rooms</button>
 	<a id="test" onClick="get_room(1)" href="#">room</a>
 	<button id="room">room</button>
