@@ -51,6 +51,7 @@ Class Course_model extends CI_Model
 	public function get_course($course_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->join('room',"room.room_id = $this->TABLENAME.held_here");
 		$this->db->where('course_id', $course_id);
 		$query = $this->db->get();
 		return $query->result();
