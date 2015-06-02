@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Instructors</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#instructors").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/instructor/get_instructors',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					//alert(data.rows[0]["full_name"]);
+					var $full_name;
+					var $bio;
+					for (i = 0; i < data.rows.length; i++){
+						$full_name = $('<h1 id="idtest">').text(data.rows[i].full_name);
+						$bio = $('<p>').text(data.rows[i].bio);
+						$('#info').append($full_name).append($bio);
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#instructors_month").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/instructor/get_instructors_month',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					//alert(data.rows[0]["full_name"]);
+					var $full_name;
+					var $bio;
+					for (i = 0; i < data.rows.length; i++){
+						$full_name = $('<h1 id="idtest">').text(data.rows[i].full_name);
+						$bio = $('<p>').text(data.rows[i].bio);
+						$('#info').append($full_name).append($bio);
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#instructor").click(function(){
+			$.ajax({
+				url : 'http://localhost/cke/index.php/instructor/get_instructor/1',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					//alert(data.course_cardinality[3].course_id);
+					var $full_name = $('<h1>').text(data.rows[0]['full_name']);
+					var $bio = $('<p>').text(data.rows[0].bio);
+					$('#info').append($full_name).append($bio);
+					var $course_id;
+					var $course;
+					for (i = 0; i < data.course_cardinality.length; i++){
+						$course_id = $('<p>').text(data.course_cardinality[i].course_id);
+						$course_name = $('<p>').text(data.course_cardinality[i].course_name);
+						$('#info').append($course_id).append($course_name);					
+					}
+					var $course_category_id;
+					var $course_category;
+					for (i = 0; i < data.course_categories_cardinality.length; i++){
+						$course_category_id = $('<p>').text(data.course_categories_cardinality[i].category_id);
+						$course_category_name = $('<p>').text(data.course_categories_cardinality[i].category_name);
+						$('#info').append($course_category_id).append($course_category_name);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#courses_alphabet").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/course/get_courses_alphabet',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					//alert(data.rows[0]["course_name"]);
+					for (i = 0; i < data.rows.length; i++){
+						var $course_id = $('<h1>').text(data.rows[i].course_id);
+						var $course_name = $('<h1>').text(data.rows[i].course_name);
+						var $description = $('<p>').text(data.rows[i].description);
+						var $category_name = $('<p>').text(data.rows[i].category_name);
+						var $level = $('<p>').text(data.rows[i].level);
+						$('#info').append($course_id).append($course_name).append($description).append($category_name).append($level);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#courses_level").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/course/get_courses_level',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					for (i = 0; i < data.rows.length; i++){
+						var $course_id = $('<h1>').text(data.rows[i].course_id);
+						var $course_name = $('<h1>').text(data.rows[i].course_name);
+						var $description = $('<p>').text(data.rows[i].description);
+						var $category_name = $('<p>').text(data.rows[i].category_name);
+						var $level = $('<p>').text(data.rows[i].level);
+						$('#info').append($course_id).append($course_name).append($description).append($category_name).append($level);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#course").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/course/get_course/1',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					var $course_name = $('<h1>').text(data.rows[0].course_name);
+					var $description = $('<p>').text(data.rows[0].description);
+					var $category_name = $('<p>').text(data.rows[0].category_name);
+					var $level = $('<p>').text(data.rows[0].level);
+					$('#info').append($course_name).append($description).append($level);
+					for(i=0; i < data.instructor_cardinality.length; i++)
+					{
+						var $instructor_id = $('<p>').text(data.instructor_cardinality[i].instructor_id);
+						var $full_name = $('<p>').text(data.instructor_cardinality[i].full_name);
+						$('#info').append($instructor_id).append($full_name);
+					}
+					for(i=0; i < data.course_category_cardinality.length; i++)
+					{
+						var $category_id = $('<p>').text(data.course_category_cardinality[i].category_id);
+						var $category_name = $('<p>').text(data.course_category_cardinality[i].category_name);
+						$('#info').append($category_id).append($category_name);
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#course_categories").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/course_category/get_course_categories',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					for (i = 0; i < data.rows.length; i++){
+						var $category_id = $('<h1>').text(data.rows[i].category_id);
+						var $category_name = $('<h1>').text(data.rows[i].category_name);
+						var $about = $('<p>').text(data.rows[i].about);
+						$('#info').append($category_id).append($category_name).append($about);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#course_category").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/course_category/get_course_category/1',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					var $category_id = $('<h1>').text(data.rows[0].category_id);
+					var $category_name = $('<h1>').text(data.rows[0].category_name);
+					var $about = $('<p>').text(data.rows[0].about);
+					$('#info').append($category_id).append($category_name).append($about);	
+					for (i = 0; i < data.instrcutor_cardinality.length; i++){
+						var $instructor_id = $('<h1>').text(data.instrcutor_cardinality[i].instructor_id);
+						var $full_name = $('<h1>').text(data.instrcutor_cardinality[i].full_name);
+						$('#info').append($instructor_id).append($full_name);					
+					}
+					for (i = 0; i < data.course_cardinality.length; i++){
+						var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
+						var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
+						$('#info').append($course_id).append($course_name);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#rooms").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/room/get_rooms',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					for (i = 0; i < data.rows.length; i++){
+						var $room_id = $('<h1>').text(data.rows[i].room_id);
+						var $room_name = $('<h1>').text(data.rows[i].room_name);
+						$('#info').append($room_id).append($room_name);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		
+		$("#room").click(function() {
+			$.ajax({
+				url : 'http://localhost/cke/index.php/room/get_room/1',
+				data : {
+					format : 'json'
+				},
+				error: function(xhr,err) {
+					$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					$('#info').append("responseText: "+xhr.responseText)
+				},
+				dataType : 'json',
+				success : function(data) {
+					var $room_id = $('<h1>').text(data.rows[0].room_id);
+					var $room_name = $('<h1>').text(data.rows[0].room_name);
+					$('#info').append($room_id).append($room_name);
+					for (i = 0; i < data.course_cardinality.length; i++){
+						var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
+						var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
+						$('#info').append($course_id).append($course_name);					
+					}
+				},
+				type : 'GET'
+			});
+		});
+		//end of #room
+		
+	});
+	
+	function get_room($room_id){	
+		var $url = 'http://localhost/cke/index.php/room/get_room/'+$room_id;
+		$.ajax({
+			url : $url,
+			data : {
+				format : 'json'
+			},
+			error: function(xhr,err) {
+				$('#info').append("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				$('#info').append("responseText: "+xhr.responseText)
+			},
+			dataType : 'json',
+			success : function(data) {
+				var $room_id = $('<h1>').text(data.rows[0].room_id);
+				var $room_name = $('<h1>').text(data.rows[0].room_name);
+				$('#info').append($room_id).append($room_name);
+				for (i = 0; i < data.course_cardinality.length; i++){
+					var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
+					var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
+					$('#info').append($course_id).append($course_name);					
+				}
+			},
+			type : 'GET'
+		});
+	}
+	
+</script>
+</head>
+<body>
+
+	<button id="instructors">instructors</button>
+	<button id="instructors_month">instructors_month</button>
+	<button id="instructor">instructor</button>
+	<button id="courses_alphabet">courses_alphabet</button>
+	<button id="courses_level">courses_level</button>
+	<button id="course">course</button>
+	<button id="course_categories">course_categories</button>
+	<button id="course_category">course_category</button>
+	<button id="rooms">rooms</button>
+	<a id="test" onClick="get_room(1)" href="#">room</a>
+	<button id="room">room</button>
+
+<div id="info"></div>
+
+</body>
+</html>
