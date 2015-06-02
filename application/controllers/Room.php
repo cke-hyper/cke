@@ -1,6 +1,8 @@
 <?php
+
 class Room extends CI_Controller
 {
+
 
 	function __construct() {
 		parent::__construct ();
@@ -31,8 +33,10 @@ class Room extends CI_Controller
 	function get_room($room_id = 1){
 		$data ['rows'] = $this->room_model->get_room($room_id);
 		//cardinality between room and course
-		$data ['course_cardinality'] = $this->course_model->get_courses($room_id);
+		$data ['course_cardinality'] = $this->course_model->get_courses_room($room_id);
 		print json_encode($data);
 	}
+
 }
+
 ?>

@@ -1,13 +1,14 @@
 <?php
+
 /**
  * this class is used for course_category
  * table doing curd
  * add by yuxing
  * 2015-05-27
  */
-
 Class Course_category_model extends CI_Model
 {
+
 	//table name
 	private $TABLENAME = 'course_category';
 	
@@ -21,9 +22,10 @@ Class Course_category_model extends CI_Model
 	 * sql: select * from course_category
 	 * return arrow of course_category table
 	 * */
-	public function get_all(){
+	public function get_all($order="category_name", $direction="ASC"){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->order_by($order, $direction);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -40,6 +42,8 @@ Class Course_category_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+
 }
 
 ?>

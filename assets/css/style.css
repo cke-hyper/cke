@@ -28,8 +28,12 @@ p {
 	font-size:200%;
 	text-align:justify;
 	vertical-align: middle;
-	text-align: center;
 }
+
+.centeredtext {
+    text-align: center;
+}
+
 object{
 	text-align:center; 
 	max-width: 100%;

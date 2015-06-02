@@ -1,13 +1,14 @@
 <?php
+
 /**
  * this class is used for teaches_2
  * table doing curd
  * add by yuxing
  * 2015-05-27
  */
-
 Class Teaches_2_model extends CI_Model
 {
+
 	//table name
 	private $TABLENAME = 'teaches_2';
 	
@@ -37,6 +38,7 @@ Class Teaches_2_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
 		$this->db->where('instructor_id', $instructor_id);
+		$this->db->join('course_category', "course_category.category_id = $this->TABLENAME.category_id");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -49,12 +51,14 @@ Class Teaches_2_model extends CI_Model
 	public function get_instructors($category_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->join('instructor',"instructor.instructor_id = $this->TABLENAME.instructor_id");
 		$this->db->where('category_id', $category_id);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	
+
+
 }
 
 ?>

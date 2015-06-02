@@ -1,13 +1,14 @@
 <?php
+
 /**
  * this class is used for offer
  * table doing curd
  * add by yuxing
  * 2015-05-27
  */
-
 Class Offer_model extends CI_Model
 {
+
 	//table name
 	private $TABLENAME = 'offer';
 	
@@ -36,6 +37,7 @@ Class Offer_model extends CI_Model
 	public function get_courses($course_category_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->join('course',"course.course_id = $this->TABLENAME.course_id");
 		$this->db->where('category_id', $course_category_id);
 		$query = $this->db->get();
 		return $query->result();
@@ -49,12 +51,14 @@ Class Offer_model extends CI_Model
 	public function get_course_categories($course_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->join('course_category', "course_category.category_id = $this->TABLENAME.category_id");
 		$this->db->where('course_id', $course_id);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	
+
+
 }
 
 ?>

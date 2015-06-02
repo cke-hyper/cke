@@ -1,6 +1,8 @@
 <?php
+
 class Instructor extends CI_Controller
 {
+
 
 	function __construct() {
 		parent::__construct ();
@@ -21,6 +23,18 @@ class Instructor extends CI_Controller
 	 * */
 	function get_instructors(){
 		$data ['rows'] = $this->instructor_model->get_all();
+		//cardinality between instructor and course
+		//$data ['cardinality'] = $this->teaches_1_model->get_all();
+		print json_encode($data);
+	}
+	
+	/*
+	 * for the purpuse of test : base_url() + index.php/instructor/get_instructors_month
+	 * return the json type of data
+	 * */
+	function get_instructors_month(){
+		$data ['rows'] = $this->instructor_model->get_instructors_by_month();
+		//cardinality between instructor and course
 		//$data ['cardinality'] = $this->teaches_1_model->get_all();
 		print json_encode($data);
 	}
@@ -37,8 +51,9 @@ class Instructor extends CI_Controller
 		$data['course_categories_cardinality'] = $this->teaches_2_model->get_course_categories($instructor_id);
 		print json_encode($data);
 	}
-	
-	
-	
+
+
+
 }
+
 ?>
