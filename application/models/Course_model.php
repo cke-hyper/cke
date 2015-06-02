@@ -38,37 +38,64 @@ Class Course_model extends CI_Model
 // 		{
 // 			$this->db->limit($limit, $offset);
 // 		}
-        $query = $this->db->get();
-        return $query->result();
-    }
 
-    /*
-     * this function is to get specific row of course table
-     * sql: select * from course where course_id = $course_id
-     * return the row
-     */
-    public function get_course($course_id)
-    {
-        $this->db->select('*');
-        $this->db->from($this->TABLENAME);
-        $this->db->where('course_id', $course_id);
-        $query = $this->db->get();
-        return $query->result();
-    }
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	/*
+	 * this function is to get specific row of course table
+	 * sql: select * from course where course_id = $course_id 
+	 * return the row
+	 */
+	public function get_course($course_id){
+		$this->db->select('*');
+		$this->db->from($this->TABLENAME);
+		$this->db->where('course_id', $course_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	/*
+	 * this function is to get rows of course table order by alphabet
+	 * sql: select * from course ORDER BY course_name ASC 
+	 * return the row
+	 */
+	public function get_course_by_alphabet($order="course_name", $direction="ASC"){
+		$this->db->select('*');
+		$this->db->from($this->TABLENAME);
+		$this->db->join('course_category', "course_category.category_id = $this->TABLENAME.belongs_to");
+		$this->db->order_by($order, $direction);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	/*
+	 * this function is to get rows of course table order by level
+	 * sql: select * from course ORDER BY level ASC
+	 * return the row
+	 */
+	public function get_course_by_level($order="level", $direction="ASC"){
+		$this->db->select('*');
+		$this->db->from($this->TABLENAME);
+		$this->db->order_by($order, $direction);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	/*
+	 * this function is to get specific row of course table
+	 * sql: select * from course where course_id = $course_id
+	 * return the row
+	 */
+	public function get_courses_room($room_id){
+		$this->db->select('*');
+		$this->db->from($this->TABLENAME);
+		$this->db->where('belongs_to', $room_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 
-    /*
-     * this function is to get specific row of course table
-     * sql: select * from course where course_id = $course_id
-     * return the row
-     */
-    public function get_courses($room_id)
-    {
-        $this->db->select('*');
-        $this->db->from($this->TABLENAME);
-        $this->db->where('belongs_to', $room_id);
-        $query = $this->db->get();
-        return $query->result();
-    }
 
 }
 
