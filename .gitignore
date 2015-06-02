@@ -224,3 +224,6 @@ pip-log.txt
 .idea/scopes/scope_settings.xml
 database.php
 application/config/database.php
+composer.json
+contributing.md
+readme.rst
