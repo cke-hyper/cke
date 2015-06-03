@@ -334,7 +334,9 @@ $(document).ready(function () {
                     $bio = $('<p>').text(data.rows[i].bio.substring(0, 800) + "... ").append($link);
 
                     $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio);
-                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    if (i%2 == 1)
+                        $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
+                    else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
                 }
             },
@@ -375,7 +377,9 @@ $(document).ready(function () {
                     $category_link = $($temp).text(data.rows[i].category_name);
                     $course_categories.append($category_link);
                     $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories);
-                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    if (i%2 == 1)
+                        $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
+                    else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
                 }
             },
@@ -416,7 +420,9 @@ $(document).ready(function () {
                     $category_link = $($temp).text(data.rows[i].category_name);
                     $course_categories.append($category_link);
                     $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories);
-                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    if (i%2 == 1)
+                        $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
+                    else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
                 }
             },
@@ -452,7 +458,9 @@ $(document).ready(function () {
                     $about = $('<p>').text(data.rows[i].about.substring(0,800) + "... ").append($link);
 
                     $second = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about);
-                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    if (i%2 == 1)
+                        $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
+                    else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
                 }
             },
@@ -487,10 +495,10 @@ $(document).ready(function () {
                     $second = $('<div class="row">').append($img);
                     $room_name = $('<h1>').text(data.rows[i].room_name);
                     $temp = '<a onClick="get_room('+ data.rows[i].room_id +')" href="#">';
-                    $link = $($temp).text("Detailed");
-                    $first = $('<div class="row">').append($room_name).append($link);
+                    $first = $('<div class="row">').append($room_name);
                     $divs = $('<div class="col-md-5">').append($onecolumn).append($first).append($second);
-                    $('#page_content').append($onecolumn).append($divs);
+                    $link = $($temp).append($divs);
+                    $('#page_content').append($onecolumn).append($link);
                 }
             },
             type : 'GET'
