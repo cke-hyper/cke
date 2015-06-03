@@ -93,7 +93,7 @@ Class Course_model extends CI_Model
 	public function get_courses_room($room_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
-		$this->db->where('belongs_to', $room_id);
+		$this->db->where('held_here', $room_id);
 		$query = $this->db->get();
 		return $query->result();
 	}
