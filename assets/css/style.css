@@ -106,4 +106,31 @@ a.disabled {
     left: 10px;
 }
 
+.schedule th,td
+{
+    margin: 0;
+    text-align: center;
+    border-collapse: collapse;
+    outline: 1px solid #e3e3e3;
+}
+
+.schedule td
+{
+    padding: 5px 10px;
+}
+
+.schedule th
+{
+    background: #666;
+    color: white;
+    padding: 5px 10px;
+}
+
+.schedule td:hover
+{
+    cursor: pointer;
+    background: #666;
+    color: white;
+}
+
 

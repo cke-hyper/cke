@@ -323,9 +323,6 @@ $(document).ready(function () {
         setVisibility();
         ignore = true;
         console.log(stack);
-        console.log(forward_stack);
-        eval(stack[stack.length - 1]);
-
     });
     $("#forward_button").click(function() {
         if (!forward_flag) return;
@@ -338,9 +335,6 @@ $(document).ready(function () {
         setVisibility();
         ignore = true;
         eval(ele);
-        console.log(stack);
-        console.log(forward_stack);
-
     });
     $(".navigator").click(function(event) {
         if (ignore) {ignore=false; return;}
@@ -351,8 +345,55 @@ $(document).ready(function () {
         forward_flag = false;
         back_flag = stack.length > 1;
         setVisibility();
-        console.log(stack);
-        console.log(forward_stack);
+    });
+    $("#overall_schedule").click(function() {
+        $.ajax({
+            url: $base_url + 'schedule/get_all',
+            data: {
+                format: 'json'
+            },
+            error: function (xhr, err) {
+                $('#page_content').append("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                $('#page_content').append("responseText: " + xhr.responseText)
+            },
+            dataType: 'json',
+            success: function (data) {
+                //clear the html code
+                $('#page_content').html("");
+                var $HEADING = $('<h1>').text('OVERALL SCHEDULE');
+                $('#page_content').append($HEADING);
+                schedule = $('<div class="col-md-10">');
+                table = $('<table class="schedule">');
+                row = $('<tr>');
+                days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                row.append($('<th>').text(""));
+                for (i = 0; i<7; i++) {
+                    row.append($('<th>').text(days[i]));
+                }
+                table.append(row);
+                for (i = 0; i < data.rows.length; i++) {
+                    row = $('<tr>');
+                    hour = data.rows[i].Hour;
+                    row.append($('<th>').text(hour + ":00"));
+                    for (j = 0; j<7; j++) {
+                        id = eval('data.rows[i].' + days[j]);
+                        if (id != null) {
+                            txt = data.cardinality[parseInt(id) - 1].course_name;
+                            tmp ='<td onclick="' + 'get_course(' + id + ')'  + '">'
+                            row.append($(tmp).text(txt));
+                        }
+                        else {
+                            row.append($('<td>').text(""));
+                        }
+                    }
+                    table.append(row);
+                }
+                all = $('<div class="row">').append($('<div class="col-md-1">'));
+                all.append(schedule.append(table));
+                $('#page_content').append(all);
+            },
+            type: 'GET'
+        });
     });
     $("#instructors").click(function () {
         $.ajax({
