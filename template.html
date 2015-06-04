@@ -37,33 +37,33 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Our gym <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Location</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Overall Schedule</a></li>
-                <li><a href="#">FEEs and Registration</a></li>
-                <li><a href="#">Our equipement</a></li>
+                <li class="active"><a id="our_gym" href="#" class="navigator">Our gym <span class="sr-only">(current)</span></a></li>
+                <li><a id="location" href="#" class="navigator">Location</a></li>
+                <li><a id="testimonials" href="#" class="navigator">Testimonials</a></li>
+                <li><a id="overall_schedule" href="#" class="navigator">Overall Schedule</a></li>
+                <li><a id="fees_and_registration" href="#" class="navigator">FEEs and Registration</a></li>
+                <li><a id="our_equipment" href="#" class="navigator">Our equipment</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Instructors
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a id="instructors" href="#">All instructors</a></li>
+                        <li><a id="instructors" class="navigator" href="#">All instructors</a></li>
                         <li class="divider"></li>
-                        <li><a id="instructors_month" href="#">Instructors of the month</a></li>
+                        <li><a id="instructors_month" class="navigator" href="#">Instructors of the month</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="hover" aria-expanded="false">Courses
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#" id="courses_alphabet">Courses by alphapet</a></li>
+                        <li><a href="#" class="navigator" id="courses_alphabet">Courses by alphapet</a></li>
                         <li class="divider"></li>
-                        <li><a href="#" id="courses_level">Courses by level</a></li>
+                        <li><a href="#" class="navigator" id="courses_level">Courses by level</a></li>
                     </ul>
                 </li>
-                <li><a href="#" id="course_categories">Course categories</a></li>
-                <li><a href="#" id="rooms">Rooms</a></li>
+                <li><a href="#" class="navigator" id="course_categories">Course categories</a></li>
+                <li><a href="#" class="navigator" id="rooms">Rooms</a></li>
             </ul>
 
 
@@ -73,7 +73,13 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-<div id="page_content"></div>
+<div style="height: 40px; width: 100%">
+    <div style="width: 50px; float:left"><a id="back_button" href="#" class="btn btn-info btn-md"><span
+            class="glyphicon glyphicon-arrow-left"></span></a></div>
+    <div style="float:right"><a id="forward_button" href="#" class="btn btn-info btn-md"><span
+            class="glyphicon glyphicon-arrow-right"></span></a></div>
+</div>
+<div id="page_content" class="container-fluid"></div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

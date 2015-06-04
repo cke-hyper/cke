@@ -3,7 +3,34 @@ function getContent(page_name) {
     $('#page_content').load($base_url + 'Page/get_page/' + page_name);
 }
 
+var back_flag = false;
+var ignore = false;
+var forward_flag = false;
+var stack = ["get_our_gym()"];
+var forward_stack = [];
+
+function setVisibility() {
+    if (back_flag)
+        $("#back_button").removeClass("disabled");
+    else
+        $("#back_button").addClass("disabled");
+    if (forward_flag)
+        $("#forward_button").removeClass("disabled");
+    else
+        $("#forward_button").addClass("disabled");
+}
+
+function push_stack($theStack, $ele) {
+    if ($theStack[$theStack.length - 1] != $ele) {
+        $theStack.push($ele);
+    }
+    forward_flag = forward_stack.length > 0;
+    back_flag = stack.length > 1;
+}
+
 function get_instructor($instructor_id) {
+    $(".nav li").removeClass('active');
+    push_stack(stack,"get_instructor(" + $instructor_id + ")");
     var $url = $base_url + 'instructor/get_instructor/' + $instructor_id;
     $.ajax({
         url: $url,
@@ -65,6 +92,8 @@ function get_instructor($instructor_id) {
     });
 }
 function get_course($course_id){
+    $(".nav li").removeClass('active');
+    push_stack(stack,"get_course(" + $course_id + ")");
     var $url = $base_url + 'course/get_course/'+$course_id;
     $.ajax({
         url : $url,
@@ -130,6 +159,8 @@ function get_course($course_id){
     });
 }
 function get_category($category_id){
+    $(".nav li").removeClass('active');
+    push_stack(stack,"get_category(" + $category_id + ")");
     var $url = $base_url + 'course_category/get_course_category/'+$category_id;
     $.ajax({
         url : $url,
@@ -187,6 +218,8 @@ function get_category($category_id){
     });
 }
 function get_room($room_id){
+    $(".nav li").removeClass('active');
+    push_stack(stack,"get_room(" + $room_id + ")");
     var $url = $base_url + 'room/get_room/'+$room_id;
     $.ajax({
         url : $url,
@@ -234,6 +267,18 @@ function get_room($room_id){
         type : 'GET'
     });
 }
+function get_our_gym() {$("#our_gym").click();};
+function get_location() {$("#location").click();};
+function get_testimonials() {$("#testimonials").click();};
+function get_overall_schedule() {$("#overall_schedule").click();};
+function get_fees_and_registration() {$("#fees_and_registration").click();};
+function get_our_equipment() {$("#our_equipment").click();};
+function get_instructors() {$("#instructors").click();};
+function get_instructors_month() {$("#instructors_month").click();};
+function get_courses_alphabet() {$("#courses_alphabet").click();};
+function get_courses_level() {$("#courses_level").click();};
+function get_course_categories() {$("#course_categories").click();};
+function get_rooms() {$("#rooms").click();};
 /**
  * 1 -> ourgym
  * 2 -> location
@@ -266,6 +311,49 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
+    setVisibility();
+    $("#back_button").click(function() {
+        if (!back_flag) return;
+        ele = stack.pop();
+        if (stack.length == 1) {
+            back_flag = false;
+        }
+        forward_stack.push(ele);
+        forward_flag = true;
+        setVisibility();
+        ignore = true;
+        console.log(stack);
+        console.log(forward_stack);
+        eval(stack[stack.length - 1]);
+
+    });
+    $("#forward_button").click(function() {
+        if (!forward_flag) return;
+        ele = forward_stack.pop();
+        if (forward_stack.length == 0) {
+            forward_flag = false;
+        }
+        stack.push(ele);
+        back_flag = true;
+        setVisibility();
+        ignore = true;
+        eval(ele);
+        console.log(stack);
+        console.log(forward_stack);
+
+    });
+    $(".navigator").click(function(event) {
+        if (ignore) {ignore=false; return;}
+        $(".nav li").removeClass('active');
+        str = "get_" + event.target.id + "()";;
+        push_stack(stack, str);
+        forward_stack = [];
+        forward_flag = false;
+        back_flag = stack.length > 1;
+        setVisibility();
+        console.log(stack);
+        console.log(forward_stack);
+    });
     $("#instructors").click(function () {
         $.ajax({
             url: $base_url + 'instructor/get_instructors',
