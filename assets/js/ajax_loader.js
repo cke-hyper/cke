@@ -368,6 +368,8 @@ $(document).ready(function () {
             success: function (data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $HEADING = $('<h1>').text('ALL INSTRUCTORS');
+                $('#page_content').append($HEADING);
                 var $full_name;
                 var $bio;
                 for (i = 0; i < data.rows.length; i++) {
@@ -407,6 +409,8 @@ $(document).ready(function () {
             success: function (data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $HEADING = $('<h1>').text('INSTRUCTORS OF MONTH');
+                $('#page_content').append($HEADING)
                 var $full_name;
                 var $bio;
                 for (i = 0; i < data.rows.length; i++) {
@@ -445,6 +449,8 @@ $(document).ready(function () {
             success : function(data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $HEADING = $('<h1>').text('ALL COURSES IN ALPHABETIC ORDER');
+                $('#page_content').append($HEADING);
                 var $full_name;
                 var $bio;
                 for (i = 0; i < data.rows.length; i++){
@@ -452,7 +458,7 @@ $(document).ready(function () {
                     $img = $($temp);
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $first = $('<div class="col-md-5">').append($img);
-                    $course_name = $('<h1>').text(data.rows[i].full_name);
+                    $course_name = $('<h2>').text(data.rows[i].course_name);
                     //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_course('+ data.rows[i].course_id +')" href="#">';
                     $link = $($temp).text("More");
@@ -464,7 +470,11 @@ $(document).ready(function () {
                     var $temp = '<a onClick="get_category('+ data.rows[i].category_id +')" href="#">';
                     $category_link = $($temp).text(data.rows[i].category_name);
                     $course_categories.append($category_link);
-                    $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories);
+                    $COURSEL = $('<b>').text("COURSE LEVEL: ");
+                    $course_level = data.rows[i].level;
+                    $COURSEL.append($course_level);
+                    $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories).append($COURSEL);
+                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     if (i%2 == 1)
                         $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
                     else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
@@ -488,14 +498,19 @@ $(document).ready(function () {
             success : function(data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $HEADING = $('<h1>').text('ALL COURSES IN LEVEL ORDER');
+                $('#page_content').append($HEADING);
                 var $full_name;
                 var $bio;
+                var $level="";
+                var $SEPARATOR = $('<div class="divider_jackie">')
+                //alert(!$level == data.rows[0].level);
                 for (i = 0; i < data.rows.length; i++){
                     var $temp ='<img src="Pictures/ins-img/' + data.rows[i].course_id+ '.jpg">';
                     $img = $($temp);
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $first = $('<div class="col-md-5">').append($img);
-                    $course_name = $('<h1>').text(data.rows[i].full_name);
+                    $course_name = $('<h2>').text(data.rows[i].course_name);
                     //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_course('+ data.rows[i].course_id +')" href="#">';
                     $link = $($temp).text("More");
@@ -507,10 +522,25 @@ $(document).ready(function () {
                     var $temp = '<a onClick="get_category('+ data.rows[i].category_id +')" href="#">';
                     $category_link = $($temp).text(data.rows[i].category_name);
                     $course_categories.append($category_link);
-                    $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories);
-                    if (i%2 == 1)
-                        $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
-                    else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    $COURSEL = $('<b>').text("COURSE LEVEL: ");
+                    $course_level = data.rows[i].level;
+                    $COURSEL.append($course_level);
+                    $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories).append($COURSEL);
+                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    //separator
+                    var $temp_level = data.rows[i].level.toString()
+                    if($level != $temp_level)
+                    {
+//							corresponding code for separator, icon need awesome font support!!css for class="divider_jackie" is on the top of this page!!
+//					 		<div class="divider_jackie">
+//					 		<i class="fa fa-heart-o fa-lg"></i>
+//							basic
+//					 		</div>
+                        $level = data.rows[i].level;
+                        $SEPARATOR.append($level);
+                        $('#page_content').append('<i class="fa fa-heart-o fa-lg">').append($SEPARATOR);
+                        $SEPARATOR = $('<div class="divider_jackie">');
+                    }
                     $('#page_content').append($divs);
                 }
             },
@@ -531,6 +561,8 @@ $(document).ready(function () {
             success : function(data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $HEADING = $('<h1>').text('ALL COURSE CATEGORIES');
+                $('#page_content').append($HEADING);
                 var $category_name;
                 var $about;
                 for (i = 0; i < data.rows.length; i++){
@@ -574,6 +606,8 @@ $(document).ready(function () {
                 }
                 //clear the html code
                 $('#page_content').html("");
+                var $HEADING = $('<h1>').text('ALL ROOMS');
+                $('#page_content').append($HEADING);
                 var $category_name;
                 var $about;
                 for (i = 0; i < data.rows.length; i++){

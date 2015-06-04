@@ -83,4 +83,27 @@ a.disabled {
     cursor: default
 }
 
+.divider_jackie {
+    margin-top: 30px;
+}
+
+.divider_jackie i {
+    color: #cccccc;
+}
+
+.divider_jackie:before, .divider_jackie:after {
+    content: "______________________";
+    color: #e6e8ea;
+    position: relative;
+    bottom: 6px;
+}
+
+.divider_jackie:before {
+    right: 10px;
+}
+
+.divider_jackie:after {
+    left: 10px;
+}
+
 
