@@ -49,6 +49,16 @@ function get_instructor($instructor_id) {
             $onecolumn = $('<div class="col-md-1">').text(" ");
             $first = $('<div class="col-md-5 img-align">').append($img);
             $full_name = $('<h1>').text(data.rows[0].full_name);
+//          <ol class="breadcrumb">
+//          <li><a href="#">Home</a></li>
+//          <li><a href="#">Library</a></li>
+//          <li class="active">Data</li>
+//        	</ol>
+            //TODO link does not work
+            var $breadcrumb = $('<ol class="breadcrumb">');
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Instrcutors"));
+            $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].full_name));
             //here using substring cut the long bio to small one to fit the front page
             $temp = '<a onClick="get_instructor(' + data.rows[0].instructor_id + ')" href="#">';
             $BIOGRAPHY = $('<h4>').text("BIOGRAPHY");
@@ -76,7 +86,7 @@ function get_instructor($instructor_id) {
                 $courses.append($course_name);
             }
 
-            $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio).append($TEACHING).append($course_categories).append($courses);
+            $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($breadcrumb).append($bio).append($TEACHING).append($course_categories).append($courses);
             $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
             $('#page_content').append($divs);
 // 				var $room_id = $('<h1>').text(data.rows[0].room_id);
@@ -109,8 +119,13 @@ function get_course($course_id){
             console.log(data);
             $('#page_content').html("");
             var $course_name = $('<h2>').text(data.rows[0].course_name);
+            //TODO link does not work
+            var $breadcrumb = $('<ol class="breadcrumb">');
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Courses"));
+            $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].course_name));
             var $description = ($('<div class="row">').append($('<div class="col-md-1">'))).append(
-                ($('<div class="col-md-10">').append($course_name)).append('<p>' + data.rows[0].description));
+                ($('<div class="col-md-10">').append($course_name).append($breadcrumb)).append('<p>' + data.rows[0].description));
             //instrcutor cardinality
             var $INSTRUCTOR = $('<b>').text("INSTRUCTOR: ");
             var $instructor=$('<div class="link-separator col-md-5">').append($INSTRUCTOR);
@@ -181,6 +196,11 @@ function get_category($category_id){
             var $onecolumn = $('<div class="col-md-1">').text(" ");
             var $firstcolumn = $('<div class="col-md-5">').append($img);
             var $category_name = $('<h2>').text(data.rows[0].category_name);
+            //TODO link does not work
+            var $breadcrumb = $('<ol class="breadcrumb">');
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Course Categories"));
+            $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].category_name));
             var $DESCRIPTION = $('<h4>').text("DESCRIPTION");
             var $about = $("<p>").text(data.rows[0].about);
             //instructor cardinality
@@ -201,7 +221,7 @@ function get_category($category_id){
                 $courses.append($($temp).text(data.course_cardinality[i].course_name));
             }
 
-            var $secondcolumn = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about).append($instructor).append($courses);
+            var $secondcolumn = $('<div class="col-md-5">').append($category_name).append($breadcrumb).append($DESCRIPTION).append($about).append($instructor).append($courses);
             var $firstrow = ($('<div class="row">').append($('<div class="col-md-1">'))).append($firstcolumn).append($secondcolumn);
 
             var $secondrow = $('<div calss="row">').append($('<h2 style="text-align: center">').text("VIDEO of origin"));
@@ -236,13 +256,11 @@ function get_room($room_id){
         success : function(data) {
             var $room_id = $('<h1>').text(data.rows[0].room_id);
             var $room_name = $('<h1>').text(data.rows[0].room_name);
-            $('#page_content').append($room_id).append($room_name);
-            for (i = 0; i < data.course_cardinality.length; i++){
-                var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
-                var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
-                $('#page_content').append($course_id).append($course_name);
-            }
-
+            //TODO link does not work
+            var $breadcrumb = $('<ol class="breadcrumb">');
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
+            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Rooms"));
+            $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].room_name));
             $('#page_content').html("");
             var $temp ='<img src="Pictures/room/' + data.rows[0].room_id+ '-1.jpg">';
             var $img = $($temp);
@@ -257,7 +275,7 @@ function get_room($room_id){
                 var $temp = '<a onClick="get_course('+ data.course_cardinality[i].course_id +')">';
                 $courses.append($($temp).text(data.course_cardinality[i].course_name));
             }
-            var $firstcolumn = $('<div class="col-md-5">').append($room_name).append($courses);
+            var $firstcolumn = $('<div class="col-md-5">').append($room_name).append($breadcrumb).append($courses);
             var $firstrow = $('<div class="row">').append($onecolumn).append($firstcolumn).append($secondcolumn);
 
             // pics
@@ -434,7 +452,7 @@ $(document).ready(function () {
 
                     $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio);
                     //$divs = null;
-                    if (i % 2 == 0)
+                    if (i % 2 == 1)
                         $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     else $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
@@ -474,7 +492,7 @@ $(document).ready(function () {
                     $bio = $('<p>').text(data.rows[i].bio.substring(0, 800) + "... ").append($link);
 
                     $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio);
-                    if (i%2 == 1)
+                    if (i%2 == 0)
                         $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
                     else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
@@ -523,7 +541,7 @@ $(document).ready(function () {
                     $COURSEL.append($course_level);
                     $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories).append($COURSEL);
                     $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
-                    if (i%2 == 1)
+                    if (i%2 == 0)
                         $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
                     else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
@@ -574,7 +592,9 @@ $(document).ready(function () {
                     $course_level = data.rows[i].level;
                     $COURSEL.append($course_level);
                     $second = $('<div class="col-md-5">').append($course_name).append($DESCRIPTION).append($description).append($course_categories).append($COURSEL);
-                    $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+                    if (i%2 == 0)
+                        $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
+                    else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     //separator
                     var $temp_level = data.rows[i].level.toString()
                     if($level != $temp_level)
@@ -623,10 +643,10 @@ $(document).ready(function () {
                     $temp = '<a onClick="get_category('+ data.rows[i].category_id +')" href="#">';
                     $link = $($temp).text("More");
                     $DESCRIPTION = $('<h5>').text("DESCRIPTION");
-                    $about = $('<p>').text(data.rows[i].about.substring(0,800) + "... ").append($link);
+                    $about = $('<p>').text(data.rows[i].about.substring(0,550) + "... ").append($link);
 
                     $second = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about);
-                    if (i%2 == 1)
+                    if (i%2 == 0)
                         $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
                     else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
                     $('#page_content').append($divs);
@@ -658,6 +678,7 @@ $(document).ready(function () {
                 $('#page_content').append($HEADING);
                 var $category_name;
                 var $about;
+                var $divs;
                 for (i = 0; i < data.rows.length; i++){
                     var $temp ='<img src="Pictures/room/' + data.rows[i].room_id+ '-1.jpg">';
                     $img = $($temp);
@@ -666,9 +687,28 @@ $(document).ready(function () {
                     $room_name = $('<h1>').text(data.rows[i].room_name);
                     $temp = '<a onClick="get_room('+ data.rows[i].room_id +')" href="#">';
                     $first = $('<div class="row">').append($room_name);
-                    $divs = $('<div class="col-md-5">').append($onecolumn).append($first).append($second);
-                    $link = $($temp).append($divs);
-                    $('#page_content').append($onecolumn).append($link);
+                    $div = $('<div class="col-md-5">').append($onecolumn).append($first).append($second);
+                    $link = $($temp).append($div);
+                    //alternative color
+                    if(i%4==0 || i%4==1)
+                    {
+                    	if(i%4==0)
+                    		$divs=$('<div class="row backgroundgrey">').append($link);
+                    	else{
+                    		$divs.append($link);
+                    		$('#page_content').append($onecolumn).append($divs);
+                    	}
+                    }
+                    else
+                    {
+                    	if(i%4==2)
+                    		$divs=$('<div class="row">').append($link);
+                    	else{
+                    		$divs.append($link);
+                    		$('#page_content').append($onecolumn).append($divs);
+                    	}
+                    }
+                    // backgroundgrey
                 }
             },
             type : 'GET'
