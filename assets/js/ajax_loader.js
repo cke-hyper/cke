@@ -148,10 +148,12 @@ function get_course($course_id){
             var $thirdrow = $('<div class="row">').append($cardinality);
 
             // pics
-            var $temp ='<img src="Pictures/ins-img/' + /*data.rows[0].course_id TODO*/'1' + '.jpg">';
-            var $img = $($temp);
+            var $temp1 ='<img src="Pictures/course/' + data.rows[0].course_id + '-1.jpg">';
+            var $temp2 ='<img src="Pictures/course/' + data.rows[0].course_id + '-2.jpg">';
+            var $img1 = $($temp1);
+            var $img2 = $($temp2);
             var $fourthrow = $('<div class="row">').append($('<div class="col-md-1">'));
-            $fourthrow.append($('<div class="col-md-5">').append($img));
+            $fourthrow.append($('<div class="col-md-5">').append($img1)).append($('<div class="col-md-5">').append($img2));
 
             $('#page_content').append($firstrow).append($secondrow).append($thirdrow).append($fourthrow);
         },
@@ -174,7 +176,7 @@ function get_category($category_id){
         dataType : 'json',
         success : function(data) {
             $('#page_content').html("");
-            var $temp ='<img src="Pictures/ins-img/' + data.rows[0].category_id+ '.jpg">';
+            var $temp ='<img src="Pictures/course_category/' + data.rows[0].category_id+ '.jpg">';
             var $img = $($temp);
             var $onecolumn = $('<div class="col-md-1">').text(" ");
             var $firstcolumn = $('<div class="col-md-5">').append($img);
@@ -242,7 +244,7 @@ function get_room($room_id){
             }
 
             $('#page_content').html("");
-            var $temp ='<img src="Pictures/ins-img/' + data.rows[0].room_id+ '.jpg">';
+            var $temp ='<img src="Pictures/room/' + data.rows[0].room_id+ '-1.jpg">';
             var $img = $($temp);
             var $onecolumn = $('<div class="col-md-1">').text(" ");
             var $secondcolumn = $('<div class="col-md-5">').append($img);
@@ -258,8 +260,14 @@ function get_room($room_id){
             var $firstcolumn = $('<div class="col-md-5">').append($room_name).append($courses);
             var $firstrow = $('<div class="row">').append($onecolumn).append($firstcolumn).append($secondcolumn);
 
-            var $secondrow =$('<div class="row">').append($('<h1>').text("WAIT FOR PICS"));
-
+            // pics
+            var $temp1 ='<img src="Pictures/room/' + data.rows[0].room_id + '-2.jpg">';
+            var $temp2 ='<img src="Pictures/room/' + data.rows[0].room_id + '-3.jpg">';
+            var $img1 = $($temp1);
+            var $img2 = $($temp2);
+            var $secondrow = $('<div class="row">').append($('<div class="col-md-1">'));
+            $secondrow.append($('<div class="col-md-5">').append($img1)).append($('<div class="col-md-5">').append($img2));
+            
             var $thirdrow =$('<div class="row">').append($('<h1>').text("GMAP")).append(data.rows[0].coord_x).append(' ').append(data.rows[0].coord_y);
 
             $('#page_content').append($firstrow).append($secondrow).append($thirdrow);
@@ -419,7 +427,6 @@ $(document).ready(function () {
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $first = $('<div class="col-md-5">').append($img);
                     $full_name = $('<h1>').text(data.rows[i].full_name);
-                    //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_instructor(' + data.rows[i].instructor_id + ')" href="#">';
                     $link = $($temp).text("More");
                     $BIOGRAPHY = $('<h4>').text("BIOGRAPHY");
@@ -463,7 +470,7 @@ $(document).ready(function () {
                     //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_instructor(' + data.rows[i].instructor_id + ')" href="#">';
                     $link = $($temp).text("More");
-                    $BIOGRAPHY = $('<h4>').text("BIOGRAPHY");
+                    $BIOGRAPHY = $('<h5>').text("BIOGRAPHY");
                     $bio = $('<p>').text(data.rows[i].bio.substring(0, 800) + "... ").append($link);
 
                     $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio);
@@ -495,7 +502,7 @@ $(document).ready(function () {
                 var $full_name;
                 var $bio;
                 for (i = 0; i < data.rows.length; i++){
-                    var $temp ='<img src="Pictures/ins-img/' +/* data.rows[i].course_id TODO*/ '1'+ '.jpg">';
+                    var $temp ='<img src="Pictures/course/' + data.rows[i].course_id+ '-1.jpg">';
                     $img = $($temp);
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $first = $('<div class="col-md-5">').append($img);
@@ -503,8 +510,8 @@ $(document).ready(function () {
                     //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_course('+ data.rows[i].course_id +')" href="#">';
                     $link = $($temp).text("More");
-                    $DESCRIPTION = $('<h4>').text("DESCRIPTION");
-                    $description = $('<p>').text(data.rows[i].description.substring(0,800) + "... ").append($link);
+                    $DESCRIPTION = $('<h5>').text("DESCRIPTION");
+                    $description = $('<p>').text(data.rows[i].description.substring(0,550) + "... ").append($link);
                     $COURSESC = $('<b>').text("COURSE CATEGORY: ");
                     var $course_categories;
                     $course_categories = $('<div class="link-separator">').append($COURSESC);
@@ -547,7 +554,7 @@ $(document).ready(function () {
                 var $SEPARATOR = $('<div class="divider_jackie">')
                 //alert(!$level == data.rows[0].level);
                 for (i = 0; i < data.rows.length; i++){
-                    var $temp ='<img src="Pictures/ins-img/' + data.rows[i].course_id+ '.jpg">';
+                    var $temp ='<img src="Pictures/course/' + data.rows[i].course_id+ '-1.jpg">';
                     $img = $($temp);
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $first = $('<div class="col-md-5">').append($img);
@@ -555,8 +562,8 @@ $(document).ready(function () {
                     //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_course('+ data.rows[i].course_id +')" href="#">';
                     $link = $($temp).text("More");
-                    $DESCRIPTION = $('<h4>').text("DESCRIPTION");
-                    $description = $('<p>').text(data.rows[i].description.substring(0,800) + "... ").append($link);
+                    $DESCRIPTION = $('<h5>').text("DESCRIPTION");
+                    $description = $('<p>').text(data.rows[i].description.substring(0,550) + "... ").append($link);
                     $COURSESC = $('<b>').text("COURSE CATEGORY: ");
                     var $course_categories;
                     $course_categories = $('<div class="link-separator">').append($COURSESC);
@@ -607,7 +614,7 @@ $(document).ready(function () {
                 var $category_name;
                 var $about;
                 for (i = 0; i < data.rows.length; i++){
-                    var $temp ='<img src="Pictures/ins-img/' + data.rows[i].category_id+ '.jpg">';
+                    var $temp ='<img src="Pictures/course_category/' + data.rows[i].category_id+ '.jpg">';
                     $img = $($temp);
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $first = $('<div class="col-md-5">').append($img);
@@ -652,7 +659,7 @@ $(document).ready(function () {
                 var $category_name;
                 var $about;
                 for (i = 0; i < data.rows.length; i++){
-                    var $temp ='<img src="Pictures/ins-img/' + data.rows[i].room_id+ '.jpg">';
+                    var $temp ='<img src="Pictures/room/' + data.rows[i].room_id+ '-1.jpg">';
                     $img = $($temp);
                     $onecolumn = $('<div class="col-md-1">').text(" ");
                     $second = $('<div class="row">').append($img);
