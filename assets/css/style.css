@@ -34,7 +34,7 @@ h1 {
     text-align: center;
     vertical-align: middle;
 }
-p {
+.textStyle {
     font-size: 200%;
     text-align: justify;
     vertical-align: middle;
@@ -65,13 +65,14 @@ h4 {
     margin-top: 30px;
     background-color: white;
     margin-bottom: auto;
+    text-align: center;
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
 }
 
-#googleMap {
+.googleMap {
     margin-left: auto;
     margin-right: auto;
     width: 850px;
@@ -170,5 +171,4 @@ a.disabled {
 {
     cursor: pointer;
     background: #666;
-    color: white;
-}
+    color: white;  }

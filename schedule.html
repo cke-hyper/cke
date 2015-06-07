@@ -9,6 +9,8 @@
 
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AjaxLoader -->
+    <script src="assets/js/ajax_loader.js"></script>
     <!-- Our CSS file -->
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <!-- Diagram CSS file -->
@@ -158,9 +160,9 @@
         <div class="col-md-12 ">
             <h1 class="text-primary">Overall schedule</h1>
 
-            <div><p>Our courses are scheduled in term of biologic timer in human kind body.</p>
+            <div><p class="textStyle">Our courses are scheduled in term of biologic timer in human kind body.</p>
 
-                <p>The time slots are devided according to our expert to offer to our cutomers the best performance and
+                <p class="textStyle">The time slots are devided according to our expert to offer to our cutomers the best performance and
                     results.</p>
             </div>
             <table class="table table-striped table-hover ">
@@ -174,88 +176,117 @@
                 <tbody>
                 <tr>
                     <td>Monday</td>
-                    <td>Teaching Yoga</td>
+                    <td class="schedule" onclick="get_course(1)">Teaching Yoga</td>
                     <td>10am-11am</td>
                 </tr>
                 <tr>
                     <td>Monday</td>
-                    <td>Supple Strength</td>
+                    <td class="schedule" onclick="get_course(12)">Supple Strength</td>
                     <td>4pm-5pm</td>
                 </tr>
                 <tr class="info">
                     <td>Monday</td>
-                    <td>Reformer</td>
+                    <td class="schedule" onclick="get_course(19)">Emergency First Aid</td>
+                    <td>6pm-7pm</td>
+                </tr>
+                <tr class="success">
+                    <td>Monday</td>
+                    <td class="schedule" onclick="get_course(4)">Reformer</td>
                     <td>7pm-8pm</td>
 
                 </tr>
-                <tr class="success">
-                    <td>Tuesday</td>
-                    <td>Teen Gym</td>
-                    <td>1pm-2pm</td>
-                </tr>
                 <tr class="danger">
-                    <td>Wednesday</td>
-                    <td>Weight Loss in Mind</td>
-                    <td>2pm-3pm</td>
+
+                    <td>Tuesday</td>
+                    <td class="schedule" onclick="get_course(17)">Swimming</td>
+                    <td>11am-12pm/td>
                 </tr>
                 <tr class="warning">
+                    <td>Tuesday</td>
+                    <td class="schedule" onclick="get_course(9)">Teen Gym</td>
+                    <td>1pm-2pm</td>
+                </tr>
+                <tr >
                     <td>Wednesday</td>
-                    <td>Exercise Referral</td>
+                    <td class="schedule" onclick="get_course(18)">Snorkelling</td>
+                    <td>11am-12pm</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td class="schedule" onclick="get_course(13)">Weight Loss in Mind</td>
+                    <td>2pm-3pm</td>
+                </tr>
+                <tr class="info">
+                    <td>Wednesday</td>
+                    <td class="schedule" onclick="get_course(2)">Exercise Referral</td>
                     <td>6pm-7pm</td>
                 </tr>
-                <tr class="active">
+                <tr class="success">
                     <td>Thursday</td>
-                    <td>Fitness Play and Games</td>
+                    <td class="schedule" onclick="get_course(8)">Fitness Play and Games</td>
                     <td>12pm-1pm</td>
                 </tr>
-                <tr>
+                <tr class="danger">
 
                     <td>Friday</td>
-                    <td>Cadillac</td>
+                    <td class="schedule" onclick="get_course(3)">Cadillac</td>
                     <td>8pm-9pm</td>
                 </tr>
-                <tr>
+                <tr class="warning">
 
                     <td>Friday</td>
-                    <td>Fitness Dance</td>
+                    <td class="schedule" onclick="get_course(7)">Fitness Dance</td>
                     <td>12pm-1pm</td>
+                </tr>
+                <tr class="active">
+
+                    <td>Friday</td>
+                    <td class="schedule" onclick="get_course(12)">Strength and Conditioning</td>
+                    <td>3pm-4pm</td>
+                </tr>
+                <tr>
+
+                    <td>Saturday</td>
+                    <td class="schedule" onclick="get_course(5)">Exercise and Disability</td>
+                    <td>12pm-1pm</td>
+                </tr>
+                <tr>
+
+                    <td>Saturday</td>
+                    <td class="schedule" onclick="get_course(10)">Teen Studio</td>
+                    <td>6pm-7pm</td>
                 </tr>
                 <tr class="info">
 
-                    <td>Friday</td>
-                    <td>Strength and Conditioning</td>
-                    <td>3pm-4pm</td>
+                    <td>Saturday</td>
+                    <td class="schedule" onclick="get_course(20)">Lower Back Pain</td>
+                    <td>8pm-9pm</td>
                 </tr>
                 <tr class="success">
 
-                    <td>Saturday</td>
-                    <td>Exercise and Disability</td>
-                    <td>12pm-1pm</td>
+                    <td>Sunday</td>
+                    <td class="schedule" onclick="get_course(14)">Obesity and Diabetes</td>
+                    <td>11am-12pm</td>
                 </tr>
                 <tr class="danger">
 
-                    <td>Saturday</td>
-                    <td>Teen Studio</td>
+                    <td>Sunday</td>
+                    <td class="schedule" onclick="get_course(15)">Rehabilitation Programme</td>
                     <td>6pm-7pm</td>
                 </tr>
                 <tr class="warning">
 
                     <td>Sunday</td>
-                    <td>Obesity and Diabetes</td>
-                    <td>11am-12pm</td>
+                    <td class="schedule" onclick="get_course(16)">Mindful Movement Breathing Workout</td>
+                    <td>7pm-8pm</td>
                 </tr>
                 <tr class="active">
 
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>Column content</td>
+                    <td>Sunday</td>
+                    <td class="schedule" onclick="get_course(6)">Exercise Nutrition</td>
+                    <td>3pm-4pm</td>
                 </tr>
-                <tr class="active">
 
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                </tr>
                 </tbody>
             </table>
 

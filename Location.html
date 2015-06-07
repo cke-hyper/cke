@@ -12,7 +12,7 @@
     <!-- Our CSS file -->
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <!-- Icon -->
-    <link rel="stylesheet" href="assets\font-awesome-4.3.0\css\font-awesome.min.css">
+    <link rel="stylesheet" href="assets/font-awesome-4.3.0/css/font-awesome.min.css">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,32 +21,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script
-            src="http://maps.googleapis.com/maps/api/js">
-    </script>
-
-    <script>
-        var myCenter = new google.maps.LatLng(45.475324,9.249217);
-
-        function initialize() {
-            var mapProp = {
-                center: myCenter,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-            var marker = new google.maps.Marker({
-                position: myCenter,
-            });
-
-            marker.setMap(map);
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -108,14 +82,14 @@
             <h1 align="center" class="text-primary">Address</h1>
             <div class="row" align="center">
             <i class="fa fa-home fa-5x"></i></div>
-            <p>Via Riccardo Pitteri, 56
+            <p class="textStyle">Via Riccardo Pitteri, 56
                 20134 Milano
                 Italy</p>
         </div>
         <h1 align="center" class="text-primary">MAP</h1>
 
         <div class="col-md-8">
-            <div id="googleMap"></div>
+            <div id="googleMap" class="googleMap"></div>
 
         </div>
 
@@ -126,10 +100,10 @@
 
             <div class="row">
                 <div class="col-md-5">
-                    <p class="text-info" style="margin-top: 10%;text-align: center;"> From Central station</p>
+                    <p class="text-info textStyle" style="margin-top: 10%;text-align: center;"> From Central station</p>
                 </div>
                 <div class="col-md-7">
-                    <p class="trans-text">
+                    <p class="trans-text textStyle">
                         <i class="fa fa-train fa-2x"></i>
 
                         Line 2(Green) to Piola Station</p>
@@ -139,21 +113,21 @@
 
             <div class="row">
                 <div class="col-md-5">
-                    <p class="text-info" style="margin-top: 10%;text-align: center;"> From Lambrate station</p>
+                    <p class="text-info textStyle" style="margin-top: 10%;text-align: center;"> From Lambrate station</p>
                 </div>
                 <div class="col-md-7">
-                            <p class="trans-text"><i class="fa fa-train fa-2x"></i>
+                            <p class="trans-text textStyle"><i class="fa fa-train fa-2x"></i>
                                 Line 2(Green)to Piola Station</p>
-                            <p class="trans-text">
+                            <p class="trans-text textStyle">
                                 <i class="fa fa-subway fa-2x"></i> 23 to Piazza Leonardo da Vinci</p>
-                            <p class="trans-text">
+                            <p class=" textStyle trans-text">
                                 <i class="fa fa-bus fa-2x"></i> 93 to Piazza Leonardo da Vinci</p>
 
                 </div>
             </div>
         </div>
         <div class="col-md-4" style="align-content: center">
-            <img src="Pictures\metro.jpg" id="metro">
+            <img src="Pictures/metro.jpg" id="metro">
         </div>
 
     </div>
@@ -165,6 +139,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
+    <script
+            src="http://maps.googleapis.com/maps/api/js">
+    </script>
+
+    <script>
+        var myCenter = new google.maps.LatLng(45.475324,9.249217);
+
+        function initialize() {
+            var mapProp = {
+                center: myCenter,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myCenter
+            });
+
+            marker.setMap(map);
+        }
+
+        //google.maps.event.addDomListener(window, 'load', initialize);
+        $(document).ready(function () {
+            initialize();
+        });
+
+    </script>
 </div>
 </body>
 </html>
