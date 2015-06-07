@@ -369,6 +369,7 @@ $(document).ready(function () {
     });
     $(".navigator").click(function(event) {
         if (ignore) {ignore=false; return;}
+        $('.navbar-toggle').click();
         $(".nav li").removeClass('active');
         str = "get_" + event.target.id + "()";;
         push_stack(stack, str);
