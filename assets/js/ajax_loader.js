@@ -55,9 +55,13 @@ function get_instructor($instructor_id) {
 //          <li class="active">Data</li>
 //        	</ol>
             //TODO link does not work
+            var $breadcrumbholder = $('<div class="row">');
             var $breadcrumb = $('<ol class="breadcrumb">');
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Instrcutors"));
+            tempvar = $('<div class="col-md-10">');
+            $breadcrumbholder.append('<div class="col-md-1">').append(tempvar);
+            tempvar.append($breadcrumb);
+            $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+            $breadcrumb.append($('<li onclick="get_instructors()">').append('<a href="#">').append("Instructors"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].full_name));
             //here using substring cut the long bio to small one to fit the front page
             $temp = '<a onClick="get_instructor(' + data.rows[0].instructor_id + ')" href="#">';
@@ -86,8 +90,9 @@ function get_instructor($instructor_id) {
                 $courses.append($course_name);
             }
 
-            $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($breadcrumb).append($bio).append($TEACHING).append($course_categories).append($courses);
+            $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio).append($TEACHING).append($course_categories).append($courses);
             $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
+            $('#page_content').append($breadcrumbholder);
             $('#page_content').append($divs);
 // 				var $room_id = $('<h1>').text(data.rows[0].room_id);
 // 				var $room_name = $('<h1>').text(data.rows[0].room_name);
@@ -348,7 +353,7 @@ $(document).ready(function () {
         forward_flag = true;
         setVisibility();
         ignore = true;
-        console.log(stack);
+        eval(stack[stack.length-1]);
     });
     $("#forward_button").click(function() {
         if (!forward_flag) return;

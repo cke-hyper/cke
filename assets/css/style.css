@@ -133,4 +133,11 @@ a.disabled {
     color: white;
 }
 
+.breadcrumb li:hover
+{
+    cursor: pointer;
+    background: #666;
+    color: white;
+}
+
 
