@@ -49,12 +49,6 @@ function get_instructor($instructor_id) {
             $onecolumn = $('<div class="col-md-1">').text(" ");
             $first = $('<div class="col-md-5 img-align">').append($img);
             $full_name = $('<h1>').text(data.rows[0].full_name);
-//          <ol class="breadcrumb">
-//          <li><a href="#">Home</a></li>
-//          <li><a href="#">Library</a></li>
-//          <li class="active">Data</li>
-//        	</ol>
-            //TODO link does not work
             var $breadcrumbholder = $('<div class="row">');
             var $breadcrumb = $('<ol class="breadcrumb">');
             tempvar = $('<div class="col-md-10">');
@@ -94,14 +88,6 @@ function get_instructor($instructor_id) {
             $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
             $('#page_content').append($breadcrumbholder);
             $('#page_content').append($divs);
-// 				var $room_id = $('<h1>').text(data.rows[0].room_id);
-// 				var $room_name = $('<h1>').text(data.rows[0].room_name);
-// 				$('#page_content').append($room_id).append($room_name);
-// 				for (i = 0; i < data.course_cardinality.length; i++){
-// 					var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
-// 					var $course_name = $('<h1>').text(data.course_cardinality[i].course_name);
-// 					$('#page_content').append($course_id).append($course_name);
-// 				}
         },
         type: 'GET'
     });
@@ -124,13 +110,12 @@ function get_course($course_id){
             console.log(data);
             $('#page_content').html("");
             var $course_name = $('<h2>').text(data.rows[0].course_name);
-            //TODO link does not work
             var $breadcrumb = $('<ol class="breadcrumb">');
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Courses"));
+            $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#" onclick="get_our_gym()">').append("Home"));
+            $breadcrumb.append($('<li onclick="get_courses_alphabet()">').append('<a href="#">').append("Courses"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].course_name));
             var $description = ($('<div class="row">').append($('<div class="col-md-1">'))).append(
-                ($('<div class="col-md-10">').append($course_name).append($breadcrumb)).append('<p>' + data.rows[0].description));
+                ($('<div class="col-md-10">').append($breadcrumb).append($course_name)).append('<p>' + data.rows[0].description));
             //instrcutor cardinality
             var $INSTRUCTOR = $('<b>').text("INSTRUCTOR: ");
             var $instructor=$('<div class="link-separator col-md-5">').append($INSTRUCTOR);
@@ -201,11 +186,12 @@ function get_category($category_id){
             var $onecolumn = $('<div class="col-md-1">').text(" ");
             var $firstcolumn = $('<div class="col-md-5">').append($img);
             var $category_name = $('<h2>').text(data.rows[0].category_name);
-            //TODO link does not work
             var $breadcrumb = $('<ol class="breadcrumb">');
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Course Categories"));
+            $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+            $breadcrumb.append($('<li onclick="get_course_categories()">').append('<a href="#">').append("Course Categories"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].category_name));
+            var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                .append($('<div class="col-md-10">').append($breadcrumb));
             var $DESCRIPTION = $('<h4>').text("DESCRIPTION");
             var $about = $("<p>").text(data.rows[0].about);
             //instructor cardinality
@@ -226,7 +212,7 @@ function get_category($category_id){
                 $courses.append($($temp).text(data.course_cardinality[i].course_name));
             }
 
-            var $secondcolumn = $('<div class="col-md-5">').append($category_name).append($breadcrumb).append($DESCRIPTION).append($about).append($instructor).append($courses);
+            var $secondcolumn = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about).append($instructor).append($courses);
             var $firstrow = ($('<div class="row">').append($('<div class="col-md-1">'))).append($firstcolumn).append($secondcolumn);
 
             var $secondrow = $('<div calss="row">').append($('<h2 style="text-align: center">').text("VIDEO of origin"));
@@ -238,7 +224,7 @@ function get_category($category_id){
             var $practices = $('<div class="row">').text(data.rows[0].practices);
             var $secondcolumn = $('<div class="col-md-5">').append($PRACTICE).append($practices);
             var $thirdrow = $('<div class="row">').append($onecolumn).append($firstcolumn).append($secondcolumn);
-            $('#page_content').append($firstrow).append($secondrow).append($thirdrow);//.append($fourthrow);
+            $('#page_content').append($breadcrumb_row).append($firstrow).append($secondrow).append($thirdrow);//.append($fourthrow);
 
         },
         type : 'GET'
@@ -263,9 +249,11 @@ function get_room($room_id){
             var $room_name = $('<h1>').text(data.rows[0].room_name);
             //TODO link does not work
             var $breadcrumb = $('<ol class="breadcrumb">');
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_our_gym()">').append("Home"));
-            $breadcrumb.append($('<li>').append('<a href="#" onclick="get_instructors()">').append("Rooms"));
+            $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+            $breadcrumb.append($('<li onclick="get_rooms()">').append('<a href="#">').append("Rooms"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].room_name));
+            var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                .append($('<div class="col-md-10">').append($breadcrumb));
             $('#page_content').html("");
             var $temp ='<img src="Pictures/room/' + data.rows[0].room_id+ '-1.jpg">';
             var $img = $($temp);
@@ -280,8 +268,25 @@ function get_room($room_id){
                 var $temp = '<a onClick="get_course('+ data.course_cardinality[i].course_id +')">';
                 $courses.append($($temp).text(data.course_cardinality[i].course_name));
             }
-            var $firstcolumn = $('<div class="col-md-5">').append($room_name).append($breadcrumb).append($courses);
+            var $firstcolumn = $('<div class="col-md-5">').append($room_name).append($courses);
             var $firstrow = $('<div class="row">').append($onecolumn).append($firstcolumn).append($secondcolumn);
+
+            //Googlemap
+            var myCenter = new google.maps.LatLng(data.rows[0].coord_x, data.rows[0].coord_y);
+            var gmap_container = $('<div class="googleMap">');
+            var mapProp = {
+                center: myCenter,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(gmap_container[0], mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myCenter
+            });
+
+            marker.setMap(map);
 
             // pics
             var $temp1 ='<img src="Pictures/room/' + data.rows[0].room_id + '-2.jpg">';
@@ -291,9 +296,9 @@ function get_room($room_id){
             var $secondrow = $('<div class="row">').append($('<div class="col-md-1">'));
             $secondrow.append($('<div class="col-md-5">').append($img1)).append($('<div class="col-md-5">').append($img2));
             
-            var $thirdrow =$('<div class="row">').append($('<h1>').text("GMAP")).append(data.rows[0].coord_x).append(' ').append(data.rows[0].coord_y);
+            var $thirdrow =$('<div class="row">').append($('<h1>').text("GMAP")).append(gmap_container);
 
-            $('#page_content').append($firstrow).append($secondrow).append($thirdrow);
+            $('#page_content').append($breadcrumb_row).append($firstrow).append($secondrow).append($thirdrow);
         },
         type : 'GET'
     });
@@ -369,7 +374,8 @@ $(document).ready(function () {
     });
     $(".navigator").click(function(event) {
         if (ignore) {ignore=false; return;}
-        $('.navbar-toggle').click();
+        //if the view is mobile view close the bar
+        if ($('#desktopTest').is(':hidden')) $('.navbar-toggle').click();
         $(".nav li").removeClass('active');
         str = "get_" + event.target.id + "()";;
         push_stack(stack, str);
@@ -377,6 +383,15 @@ $(document).ready(function () {
         forward_flag = false;
         back_flag = stack.length > 1;
         setVisibility();
+    });
+    $("#our_gym").click(function() {
+        //todo edit the html for breadcrump
+    });
+    $("#location").click(function() {
+        //todo edit the html for breadcrump
+    });
+    $("#testimonials").click(function() {
+        //todo edit the html for breadcrump
     });
     $("#overall_schedule").click(function() {
         $.ajax({
@@ -392,8 +407,13 @@ $(document).ready(function () {
             success: function (data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append("Overall Schedule"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
                 var $HEADING = $('<h1>').text('OVERALL SCHEDULE');
-                $('#page_content').append($HEADING);
+                $('#page_content').append($breadcrumb_row).append($HEADING);
                 schedule = $('<div class="col-md-10">');
                 table = $('<table class="schedule">');
                 row = $('<tr>');
@@ -427,6 +447,12 @@ $(document).ready(function () {
             type: 'GET'
         });
     });
+    $("#fees_and_registration").click(function() {
+        //todo edit the html for breadcrump
+    });
+    $("#our_equipment").click(function() {
+        //todo edit the html for breadcrump
+    });
     $("#instructors").click(function () {
         $.ajax({
             url: $base_url + 'instructor/get_instructors',
@@ -441,8 +467,13 @@ $(document).ready(function () {
             success: function (data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#">').append("All Instructors"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
                 var $HEADING = $('<h1>').text('ALL INSTRUCTORS');
-                $('#page_content').append($HEADING);
+                $('#page_content').append($breadcrumb_row).append($HEADING);
                 var $full_name;
                 var $bio;
                 for (i = 0; i < data.rows.length; i++) {
@@ -481,8 +512,18 @@ $(document).ready(function () {
             success: function (data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#">').append("Instructors of the Month"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
+                $('#page_content').append($breadcrumb_row);
                 var $HEADING = $('<h1>').text('INSTRUCTORS OF MONTH');
-                $('#page_content').append($HEADING)
+                $('#page_content').append($HEADING);
+                var $motivation_head = $('<h3>').text("Your opinions are important!!");
+                var $motivation = $('<p>').text("You are always welcome to our offices to give us negative or positive feedback about our staff. We also have questioners in each of our rooms, so that you can convey your opinions anonymously, too! " +
+                "This helps us to improve our service quality and make sure our guests are having the best possible time while enjoying their time here in our gym. With respect to your feedback, we are choosing 5 instructors every month to motivate them always work with 100% efficiency.");
+                $('#page_content').append(($('<div class="row">').append($('<div class="col-md-1">'))).append($('<div class="col-md-10">').append($motivation_head).append($motivation)));
                 var $full_name;
                 var $bio;
                 for (i = 0; i < data.rows.length; i++) {
@@ -494,10 +535,12 @@ $(document).ready(function () {
                     //here using substring cut the long bio to small one to fit the front page
                     $temp = '<a onClick="get_instructor(' + data.rows[i].instructor_id + ')" href="#">';
                     $link = $($temp).text("More");
-                    $BIOGRAPHY = $('<h5>').text("BIOGRAPHY");
-                    $bio = $('<p>').text(data.rows[i].bio.substring(0, 800) + "... ").append($link);
+                    $Motivation = $('<h5>').text("Motivation");
+                    $mot = $('<p>').text("MOTIVATION TEXT FROM DB");
+                    $BIOGRAPHY = $('<h5>').text("Biography");
+                    $bio = $('<p>').text(data.rows[i].bio.substring(0, 400) + "... ").append($link);
 
-                    $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio);
+                    $second = $('<div class="col-md-5">').append($full_name).append($Motivation).append($mot).append($BIOGRAPHY).append($bio);
                     if (i%2 == 0)
                         $divs = $('<div class="row backgroundgrey">').append($onecolumn).append($first).append($second);
                     else $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
@@ -521,6 +564,12 @@ $(document).ready(function () {
             success : function(data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#">').append("All Courses in Alphabetic Order"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
+                $('#page_content').append($breadcrumb_row);
                 var $HEADING = $('<h1>').text('ALL COURSES IN ALPHABETIC ORDER');
                 $('#page_content').append($HEADING);
                 var $full_name;
@@ -570,6 +619,12 @@ $(document).ready(function () {
             success : function(data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#">').append("All Courses in Level Order"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
+                $('#page_content').append($breadcrumb_row);
                 var $HEADING = $('<h1>').text('ALL COURSES IN LEVEL ORDER');
                 $('#page_content').append($HEADING);
                 var $full_name;
@@ -635,6 +690,12 @@ $(document).ready(function () {
             success : function(data) {
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#">').append("All Course Categories"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
+                $('#page_content').append($breadcrumb_row);
                 var $HEADING = $('<h1>').text('ALL COURSE CATEGORIES');
                 $('#page_content').append($HEADING);
                 var $category_name;
@@ -680,6 +741,12 @@ $(document).ready(function () {
                 }
                 //clear the html code
                 $('#page_content').html("");
+                var $breadcrumb = $('<ol class="breadcrumb">');
+                $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
+                $breadcrumb.append($('<li>').append('<a href="#">').append("All Rooms"));
+                var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
+                    .append($('<div class="col-md-10">').append($breadcrumb));
+                $('#page_content').append($breadcrumb_row);
                 var $HEADING = $('<h1>').text('ALL ROOMS');
                 $('#page_content').append($HEADING);
                 var $category_name;

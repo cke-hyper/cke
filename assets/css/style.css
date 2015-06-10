@@ -62,11 +62,8 @@ h4 {
     text-align: center;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
 
-#googleMap {
+.googleMap {
     margin-left: auto;
     margin-right: auto;
     width: 850px;
@@ -166,6 +163,14 @@ cursor: default
     cursor: pointer;
     background: #666;
     color: white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: black;
+}
+
+.navbar-nav .open .dropdown-menu {
+    background-color: #ffffff;
 }
 
 .divider_jackie {
