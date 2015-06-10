@@ -172,3 +172,12 @@ a.disabled {
     cursor: pointer;
     background: #666;
     color: white;  }
+
+.horizantal li{
+    display: inline;
+}
+.horizantal li:hover{
+    cursor: pointer;
+    background: #0000;
+    color: white;
+}

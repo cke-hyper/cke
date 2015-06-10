@@ -76,12 +76,24 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+
 <div class="container-fluid">
-    <div class="row backgroundgrey">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <ul class="horizantal">
+                <li><a href="Location.html">Home</a></li> |
+                <li><a href="#">Location</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row ">
         <div class="col-md-4">
             <h1 align="center" class="text-primary">Address</h1>
+
             <div class="row" align="center">
-            <i class="fa fa-home fa-5x"></i></div>
+                <i class="fa fa-home fa-5x"></i></div>
             <p class="textStyle">Via Riccardo Pitteri, 56
                 20134 Milano
                 Italy</p>
@@ -94,7 +106,7 @@
         </div>
 
     </div>
-    <div class="row ">
+    <div class="row backgroundgrey">
         <div class="col-md-8">
             <h1 class="text-primary">How to get there </h1>
 
@@ -113,15 +125,18 @@
 
             <div class="row">
                 <div class="col-md-5">
-                    <p class="text-info textStyle" style="margin-top: 10%;text-align: center;"> From Lambrate station</p>
+                    <p class="text-info textStyle" style="margin-top: 10%;text-align: center;"> From Lambrate
+                        station</p>
                 </div>
                 <div class="col-md-7">
-                            <p class="trans-text textStyle"><i class="fa fa-train fa-2x"></i>
-                                Line 2(Green)to Piola Station</p>
-                            <p class="trans-text textStyle">
-                                <i class="fa fa-subway fa-2x"></i> 23 to Piazza Leonardo da Vinci</p>
-                            <p class=" textStyle trans-text">
-                                <i class="fa fa-bus fa-2x"></i> 93 to Piazza Leonardo da Vinci</p>
+                    <p class="trans-text textStyle"><i class="fa fa-train fa-2x"></i>
+                        Line 2(Green)to Piola Station</p>
+
+                    <p class="trans-text textStyle">
+                        <i class="fa fa-subway fa-2x"></i> 23 to Piazza Leonardo da Vinci</p>
+
+                    <p class=" textStyle trans-text">
+                        <i class="fa fa-bus fa-2x"></i> 93 to Piazza Leonardo da Vinci</p>
 
                 </div>
             </div>
@@ -144,7 +159,7 @@
     </script>
 
     <script>
-        var myCenter = new google.maps.LatLng(45.475324,9.249217);
+        var myCenter = new google.maps.LatLng(45.475324, 9.249217);
 
         function initialize() {
             var mapProp = {
