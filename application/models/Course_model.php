@@ -80,7 +80,8 @@ Class Course_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
 		$this->db->join('course_category', "course_category.category_id = $this->TABLENAME.belongs_to");
-		$this->db->order_by($order, $direction);
+		//$this->db->order_by($order, $direction);
+		$this -> db -> order_by('FIELD ( level, "basic", "medium", "advanced")');
 		$query = $this->db->get();
 		return $query->result();
 	}

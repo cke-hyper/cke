@@ -140,4 +140,14 @@ a.disabled {
     color: white;
 }
 
+.divider_jackie {
+	color:#317eac;
+	 font-weight:600;
+	 font-size:150;
+  font-family: Verdana;
+  vertical-align: middle;
+  text-align: center;
+  margin:20px;
+}
+
 
