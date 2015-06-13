@@ -51,6 +51,7 @@ Class Course_model extends CI_Model
 	public function get_course($course_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
+		$this->db->join('room',"room.room_id = $this->TABLENAME.held_here");
 		$this->db->where('course_id', $course_id);
 		$query = $this->db->get();
 		return $query->result();
@@ -78,7 +79,9 @@ Class Course_model extends CI_Model
 	public function get_course_by_level($order="level", $direction="ASC"){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
-		$this->db->order_by($order, $direction);
+		$this->db->join('course_category', "course_category.category_id = $this->TABLENAME.belongs_to");
+		//$this->db->order_by($order, $direction);
+		$this -> db -> order_by('FIELD ( level, "basic", "medium", "advanced")');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -91,7 +94,7 @@ Class Course_model extends CI_Model
 	public function get_courses_room($room_id){
 		$this->db->select('*');
 		$this->db->from($this->TABLENAME);
-		$this->db->where('belongs_to', $room_id);
+		$this->db->where('held_here', $room_id);
 		$query = $this->db->get();
 		return $query->result();
 	}

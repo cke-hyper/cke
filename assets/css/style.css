@@ -197,6 +197,6 @@ a.disabled {
 }
 .horizantal li:hover{
     cursor: pointer;
-    background: #0000;
+    background: #000000;
     color: white;
 }

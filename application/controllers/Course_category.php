@@ -37,7 +37,7 @@ class Course_category extends CI_Controller
     {
         $data ['rows'] = $this->course_category_model->get_course_category($course_category_id);
         //cardinality between course_categoriy and instructor
-        $data ['instrcutor_cardinality'] = $this->teaches_2_model->get_instructors($course_category_id);
+        $data ['instructor_cardinality'] = $this->teaches_2_model->get_instructors($course_category_id);
         //cardinality between course_categoriy and courses
         $data ['course_cardinality'] = $this->offer_model->get_courses($course_category_id);
         print json_encode($data);
