@@ -1,36 +1,12 @@
 var $base_url = "http://localhost/cke/index.php/";
+var $base_url2 = "http://localhost/cke/";
+var ignore = true;
 function getContent(page_name) {
-    $('#page_content').load($base_url + 'Page/get_page/' + page_name);
-}
-
-var back_flag = false;
-var ignore = false;
-var forward_flag = false;
-var stack = ["get_our_gym()"];
-var forward_stack = [];
-
-function setVisibility() {
-    if (back_flag)
-        $("#back_button").removeClass("disabled");
-    else
-        $("#back_button").addClass("disabled");
-    if (forward_flag)
-        $("#forward_button").removeClass("disabled");
-    else
-        $("#forward_button").addClass("disabled");
-}
-
-function push_stack($theStack, $ele) {
-    if ($theStack[$theStack.length - 1] != $ele) {
-        $theStack.push($ele);
-    }
-    forward_flag = forward_stack.length > 0;
-    back_flag = stack.length > 1;
+    $('#page_content').load($base_url2 + 'single_pages/' + page_name + '.html');
 }
 
 function get_instructor($instructor_id) {
     $(".nav li").removeClass('active');
-    push_stack(stack,"get_instructor(" + $instructor_id + ")");
     var $url = $base_url + 'instructor/get_instructor/' + $instructor_id;
     $.ajax({
         url: $url,
@@ -55,7 +31,7 @@ function get_instructor($instructor_id) {
             $breadcrumbholder.append('<div class="col-md-1">').append(tempvar);
             tempvar.append($breadcrumb);
             $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
-            $breadcrumb.append($('<li onclick="get_instructors()">').append('<a href="#">').append("Instructors"));
+            $breadcrumb.append($('<li onclick="get_instructors(false)">').append('<a href="#">').append("Instructors"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].full_name));
             //here using substring cut the long bio to small one to fit the front page
             $temp = '<a onClick="get_instructor(' + data.rows[0].instructor_id + ')" href="#">';
@@ -67,8 +43,8 @@ function get_instructor($instructor_id) {
             var $course_categories = $('<div class="link-separator">').append($COURSESC);
             //course categories cardination
             for (i = 0; i < data.course_categories_cardinality.length; i++) {
-                var $category_id = $('<h1>').text(data.course_categories_cardinality[i].category_id);
-                var $temp = '<a onClick="get_course_category(' + $category_id + ')">';
+                var $category_id = data.course_categories_cardinality[i].category_id;
+                var $temp = '<a onClick="get_category(' + $category_id + ')">';
                 var $category_name = $($temp).text(data.course_categories_cardinality[i].category_name);
                 $course_categories.append($category_name);
             }
@@ -77,28 +53,27 @@ function get_instructor($instructor_id) {
             $courses.append($COURSES);
             //course cardinality
             for (i = 0; i < data.course_cardinality.length; i++) {
-                var $course_id = $('<h1>').text(data.course_cardinality[i].course_id);
+                var $course_id = data.course_cardinality[i].course_id;
                 var $temp = '<a onClick="get_course(' + $course_id + ')">';
                 var $course_name = $($temp).text(data.course_cardinality[i].course_name);
                 //alert($category_name);
                 $courses.append($course_name);
             }
-
+            FB.init({version: 'v2.3'});
             $facebook = $('<div class="fb-like" data-href="'+ data.rows[0].facebook +'" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">');
-            $twitter = $('<a href="'+ data.rows[0].twitter +'" class="twitter-follow-button" data-show-count="false">').text("fellowMe");
+            $twitter = $('<a href="'+ data.rows[0].twitter +'" class="twitter-follow-button" data-show-count="false">');
             $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio).append($facebook).append($twitter).append($TEACHING).append($course_categories).append($courses);
             $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
             $('#page_content').append($breadcrumbholder);
             $('#page_content').append($divs);
             FB.XFBML.parse();
-            $.getScript("http://platform.twitter.com/widgets.js");
+            twttr.widgets.load();
         },
         type: 'GET'
     });
 }
 function get_course($course_id){
     $(".nav li").removeClass('active');
-    push_stack(stack,"get_course(" + $course_id + ")");
     var $url = $base_url + 'course/get_course/'+$course_id;
     $.ajax({
         url : $url,
@@ -116,7 +91,7 @@ function get_course($course_id){
             var $course_name = $('<h2>').text(data.rows[0].course_name);
             var $breadcrumb = $('<ol class="breadcrumb">');
             $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#" onclick="get_our_gym()">').append("Home"));
-            $breadcrumb.append($('<li onclick="get_courses_alphabet()">').append('<a href="#">').append("Courses"));
+            $breadcrumb.append($('<li onclick="get_courses_alphabet(false)">').append('<a href="#">').append("Courses"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].course_name));
             var $description = ($('<div class="row">').append($('<div class="col-md-1">'))).append(
                 ($('<div class="col-md-10">').append($breadcrumb).append($course_name)).append('<p>' + data.rows[0].description));
@@ -171,7 +146,6 @@ function get_course($course_id){
 }
 function get_category($category_id){
     $(".nav li").removeClass('active');
-    push_stack(stack,"get_category(" + $category_id + ")");
     var $url = $base_url + 'course_category/get_course_category/'+$category_id;
     $.ajax({
         url : $url,
@@ -192,7 +166,7 @@ function get_category($category_id){
             var $category_name = $('<h2>').text(data.rows[0].category_name);
             var $breadcrumb = $('<ol class="breadcrumb">');
             $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
-            $breadcrumb.append($('<li onclick="get_course_categories()">').append('<a href="#">').append("Course Categories"));
+            $breadcrumb.append($('<li onclick="get_course_categories(false)">').append('<a href="#">').append("Course Categories"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].category_name));
             var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
                 .append($('<div class="col-md-10">').append($breadcrumb));
@@ -218,9 +192,10 @@ function get_category($category_id){
 
             var $secondcolumn = $('<div class="col-md-5">').append($category_name).append($DESCRIPTION).append($about).append($instructor).append($courses);
             var $firstrow = ($('<div class="row">').append($('<div class="col-md-1">'))).append($firstcolumn).append($secondcolumn);
-
-            var $secondrow = $('<div calss="row">').append($('<h2 style="text-align: center">').text("VIDEO of origin"));
-
+            var $video = $('<object width="970" height="500" data="' + data.rows[0].category_video + '">');
+            //var $video = $('<object  width="970" height="500" data="' + data.rows[0].category_video.replace('watch?','') + '">');
+            var $secondrow = $('<div class="row">').append($('<h2 style="text-align: center">').text("VIDEO of origin"))
+                .append($('<div class="col-md-1">')).append($('<div class="col-md-10"  style="text-align: center">').append($video));
             var $GOOD_FOR = $('<h2>').text('WHY IS GOOD?');
             var $good_for = $('<p>').text(data.rows[0].good_for);
             var $firstcolumn = $('<div class="col-md-5">').append($GOOD_FOR).append($good_for);
@@ -236,7 +211,6 @@ function get_category($category_id){
 }
 function get_room($room_id){
     $(".nav li").removeClass('active');
-    push_stack(stack,"get_room(" + $room_id + ")");
     var $url = $base_url + 'room/get_room/'+$room_id;
     $.ajax({
         url : $url,
@@ -254,7 +228,7 @@ function get_room($room_id){
             //TODO link does not work
             var $breadcrumb = $('<ol class="breadcrumb">');
             $breadcrumb.append($('<li onclick="get_our_gym()">').append('<a href="#">').append("Home"));
-            $breadcrumb.append($('<li onclick="get_rooms()">').append('<a href="#">').append("Rooms"));
+            $breadcrumb.append($('<li onclick="get_rooms(false)">').append('<a href="#">').append("Rooms"));
             $breadcrumb.append($('<li>').append('<a href="#\" class="active">').append(data.rows[0].room_name));
             var $breadcrumb_row = $('<div class="row">').append($('<div class="col-md-1">'))
                 .append($('<div class="col-md-10">').append($breadcrumb));
@@ -307,18 +281,32 @@ function get_room($room_id){
         type : 'GET'
     });
 }
-function get_our_gym() {$("#our_gym").click();};
+function get_our_gym() {location.reload()};
 function get_location() {$("#location").click();};
 function get_testimonials() {$("#testimonials").click();};
 function get_overall_schedule() {$("#overall_schedule").click();};
 function get_fees_and_registration() {$("#fees_and_registration").click();};
 function get_our_equipment() {$("#our_equipment").click();};
-function get_instructors() {$("#instructors").click();};
-function get_instructors_month() {$("#instructors_month").click();};
-function get_courses_alphabet() {$("#courses_alphabet").click();};
-function get_courses_level() {$("#courses_level").click();};
-function get_course_categories() {$("#course_categories").click();};
-function get_rooms() {$("#rooms").click();};
+function get_instructors(flag) {
+    flag = typeof flag !== 'undefined' ? flag : true;
+    ignore = false;
+    $("#instructors").click();
+};
+function get_instructors_month(flag) {
+    flag = typeof flag !== 'undefined' ? flag : true;
+    ignore = false;$("#instructors_month").click();};
+function get_courses_alphabet(flag) {
+    flag = typeof flag !== 'undefined' ? flag : true;
+    ignore = false;$("#courses_alphabet").click();};
+function get_courses_level(flag) {
+    flag = typeof flag !== 'undefined' ? flag : true;
+    ignore = false;$("#courses_level").click();};
+function get_course_categories(flag) {
+    flag = typeof flag !== 'undefined' ? flag : true;
+    ignore = false;$("#course_categories").click();};
+function get_rooms(flag) {
+    flag = typeof flag !== 'undefined' ? flag : true;
+    ignore = false;$("#rooms").click();};
 /**
  * 1 -> ourgym
  * 2 -> location
@@ -329,7 +317,7 @@ function get_rooms() {$("#rooms").click();};
  */
 
 $(document).ready(function () {
-    $(".nav li").click(function () {
+    $(".nav li").click(function (event) {
         index = $(".nav li").index($(this));
         if (index == 6 || index == 10) {
             return;
@@ -344,49 +332,17 @@ $(document).ready(function () {
         }
         $(this).addClass('active');
         if (index < 6) {
-            getContent(index + 1);
+            getContent(event.target.id);
         }
     });
 });
 
 
 $(document).ready(function () {
-    setVisibility();
-    $("#back_button").click(function() {
-        if (!back_flag) return;
-        ele = stack.pop();
-        if (stack.length == 1) {
-            back_flag = false;
-        }
-        forward_stack.push(ele);
-        forward_flag = true;
-        setVisibility();
-        ignore = true;
-        eval(stack[stack.length-1]);
-    });
-    $("#forward_button").click(function() {
-        if (!forward_flag) return;
-        ele = forward_stack.pop();
-        if (forward_stack.length == 0) {
-            forward_flag = false;
-        }
-        stack.push(ele);
-        back_flag = true;
-        setVisibility();
-        ignore = true;
-        eval(ele);
-    });
     $(".navigator").click(function(event) {
-        if (ignore) {ignore=false; return;}
-        //if the view is mobile view close the bar
-        if ($('#desktopTest').is(':hidden')) $('.navbar-toggle').click();
+        if (ignore) if ($('#desktopTest').is(':hidden')) $('.navbar-toggle').click();
+        ignore = true;
         $(".nav li").removeClass('active');
-        str = "get_" + event.target.id + "()";;
-        push_stack(stack, str);
-        forward_stack = [];
-        forward_flag = false;
-        back_flag = stack.length > 1;
-        setVisibility();
     });
     $("#our_gym").click(function() {
         //todo edit the html for breadcrump
@@ -398,6 +354,7 @@ $(document).ready(function () {
         //todo edit the html for breadcrump
     });
     $("#overall_schedule").click(function() {
+        /*
         $.ajax({
             url: $base_url + 'schedule/get_all',
             data: {
@@ -450,6 +407,7 @@ $(document).ready(function () {
             },
             type: 'GET'
         });
+        */
     });
     $("#fees_and_registration").click(function() {
         //todo edit the html for breadcrump

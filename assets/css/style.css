@@ -163,10 +163,8 @@ a.disabled {
     padding: 5px 10px;
 }
 
-.schedule td:hover {
+.schedule:hover {
     cursor: pointer;
-    background: #666;
-    color: white;
 }
 
 .breadcrumb li:hover {
@@ -199,4 +197,12 @@ a.disabled {
     cursor: pointer;
     background: #000000;
     color: white;
+}
+
+.col-md-5 img {
+    margin-left: 5%;
+    width: 90%;
+    margin-right: 5%;
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
