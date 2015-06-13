@@ -6,18 +6,21 @@
     height: 200px;
     width: 1100px;
 }
+
 #firstpic {
     max-width: 100%;
     width: auto;
     height: auto;
     margin-left: 10%;
 }
+
 .firstpic {
     max-width: 100%;
     width: auto;
     height: auto;
     margin-left: 10%;
 }
+
 .backgroundgrey {
     background-color: #F0F0F5;
 }
@@ -29,11 +32,13 @@ h1 {
     vertical-align: middle;
     text-align: center;
 }
-.schedulePhilo{
+
+.schedulePhilo {
     font-size: 200%;
     text-align: center;
     vertical-align: middle;
 }
+
 .textStyle {
     font-size: 200%;
     text-align: justify;
@@ -63,13 +68,10 @@ h4 {
 .foot {
     font-size: 100%;
     margin-top: 30px;
-    background-color: white;
+    background-color: #1995dc;
+    color: white;
     margin-bottom: auto;
     text-align: center;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
 }
 
 .googleMap {
@@ -80,18 +82,21 @@ h4 {
     max-width: 100%;
 }
 
-.trans-text{
+.trans-text {
     margin-top: 5%;
     text-align: left;
 }
-#metro{
+
+#metro {
     max-width: 100%;
     margin-top: 25%;
 }
-.col-md-12{
+
+.col-md-12 {
     margin-bottom: 2%;
 }
-p.equipText{
+
+p.equipText {
     text-align: left;
     font-size: 150%;
 }
@@ -109,12 +114,13 @@ p.equipText{
     margin-right: 10px;
 }
 
-.link-separator a:hover {color: darkorange; cursor: pointer}
+.link-separator a:hover {
+    color: darkorange;
+    cursor: pointer
+}
 
 a.disabled {
-    opacity: 0.3
-    pointer-events: none
-    cursor: default
+    opacity: 0.3 pointer-events : none cursor : default
 }
 
 .divider_jackie {
@@ -140,38 +146,51 @@ a.disabled {
     left: 10px;
 }
 
-.schedule th,td
-{
+.schedule th, td {
     margin: 0;
     text-align: center;
     border-collapse: collapse;
     outline: 1px solid #e3e3e3;
 }
 
-.schedule td
-{
+.schedule td {
     padding: 5px 10px;
 }
 
-.schedule th
-{
+.schedule th {
     background: #666;
     color: white;
     padding: 5px 10px;
 }
 
-.schedule td:hover
-{
+.schedule td:hover {
     cursor: pointer;
     background: #666;
     color: white;
 }
 
-.breadcrumb li:hover
-{
+.breadcrumb li:hover {
     cursor: pointer;
-    background: #666;
-    color: white;  }
+    color: #1995dc;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: black;
+}
+
+.navbar-nav .open .dropdown-menu {
+    background-color: #ffffff;
+}
+
+.divider_jackie {
+    color: #317eac;
+    font-weight: 600;
+    font-size: 150;
+    font-family: Verdana;
+    vertical-align: middle;
+    text-align: center;
+    margin: 20px;
+}
 
 .horizantal li{
     display: inline;
