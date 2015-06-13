@@ -96,6 +96,7 @@ function get_instructor($instructor_id) {
             $('#page_content').append($breadcrumbholder);
             $('#page_content').append($divs);
             FB.XFBML.parse();
+			$.getScript("http://platform.twitter.com/widgets.js");
 // 				var $room_id = $('<h1>').text(data.rows[0].room_id);
 // 				var $room_name = $('<h1>').text(data.rows[0].room_name);
 // 				$('#page_content').append($room_id).append($room_name);
