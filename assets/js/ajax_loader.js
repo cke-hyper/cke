@@ -89,11 +89,13 @@ function get_instructor($instructor_id) {
                 //alert($category_name);
                 $courses.append($course_name);
             }
-
-            $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio).append($TEACHING).append($course_categories).append($courses);
+            $facebook = $('<div class="fb-like" data-href="'+ data.rows[0].facebook +'" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">');
+            $twitter = $('<a href="'+ data.rows[0].twitter +'" class="twitter-follow-button" data-show-count="false">').text("fellowMe");
+            $second = $('<div class="col-md-5">').append($full_name).append($BIOGRAPHY).append($bio).append($facebook).append($twitter).append($TEACHING).append($course_categories).append($courses);
             $divs = $('<div class="row">').append($onecolumn).append($first).append($second);
             $('#page_content').append($breadcrumbholder);
             $('#page_content').append($divs);
+            FB.XFBML.parse();
 // 				var $room_id = $('<h1>').text(data.rows[0].room_id);
 // 				var $room_name = $('<h1>').text(data.rows[0].room_name);
 // 				$('#page_content').append($room_id).append($room_name);
