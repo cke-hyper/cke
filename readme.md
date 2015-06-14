@@ -22,7 +22,7 @@ DB file:			DB/Dump20150612.sql
 
 ## License
 
-GNU General Public License
+The MIT License (MIT)
 
 </content>
   <tabTrigger>readme</tabTrigger>
