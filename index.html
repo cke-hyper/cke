@@ -11,17 +11,31 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Our CSS file -->
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- Diagram CSS file -->
+    <link href="assets/css/diagram.css" rel="stylesheet" type="text/css">
     <!-- Icon -->
     <link rel="stylesheet" href="assets\font-awesome-4.3.0\css\font-awesome.min.css">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    #back-top {
+	bottom: 20px;
+	position: fixed;
+	right: 25px;
+	z-index: 9;
+}
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-default ">
+<div id="fb-root"></div>
+<script src="assets/js/facebook.js#version=v2.3"></script>
+<script src="assets/js/twitter.js"></script>
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -32,39 +46,39 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#" onclick="location.reload();">BigGym</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Our gym <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Location</a></li>
-                <li><a href="#">Testimonials</a></li>
-                <li><a href="#">Overall Schedule</a></li>
-                <li><a href="#">FEEs and Registration</a></li>
-                <li><a href="#">Our equipment</a></li>
+                <li class="active"><a id="our_gym" href="#" class="navigator">Our gym <span class="sr-only">(current)</span></a></li>
+                <li><a id="location" href="#" class="navigator">Location</a></li>
+                <li><a id="testimonials" href="#" class="navigator">Testimonials</a></li>
+                <li><a id="overall_schedule" href="#" class="navigator">Overall Schedule</a></li>
+                <li><a id="fees_and_registration" href="#" class="navigator">FEEs and Registration</a></li>
+                <li><a id="our_equipment" href="#" class="navigator">Our equipment</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Instructors
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">All instructors</a></li>
+                        <li><a id="instructors" class="navigator" href="#">All instructors</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Instructors of the month</a></li>
+                        <li><a id="instructors_month" class="navigator" href="#">Instructors of the month</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Courses
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="hover" aria-expanded="false">Courses
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Courses by alphapet</a></li>
+                        <li><a href="#" class="navigator" id="courses_alphabet">Courses by alphapet</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Courses by level</a></li>
+                        <li><a href="#" class="navigator" id="courses_level">Courses by level</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Course categories</a></li>
-                <li><a href="#">Rooms</a></li>
+                <li><a href="#" class="navigator" id="course_categories">Course categories</a></li>
+                <li><a href="#" class="navigator" id="rooms">Rooms</a></li>
             </ul>
 
 
@@ -74,135 +88,30 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <ul class="horizantal">
-                <li><a href="#">Home</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <img id="firstpic" src="Pictures\games-wallpapers-pack.jpg">
-        </div>
-        <div class="col-md-6">
-            <h1 class="text-primary">Overview</h1>
-
-            <p class="textStyle">We embrace traditional ideas, and continue to create and implement new ones. We're experienced, creative,
-                inquisitive and experts in our fields. BigGym is not a cozy place. There are no televisions,
-                no machines, no comfortable spots to sit - and there are no mirrors.</p>
-        </div>
-    </div>
-
-    <div class="row backgroundgrey">
-        <div class="col-md-12" style="text-align:center">
-            <h1 class="text-primary"><b>Video</b></h1>
-
-            <object width="970" height="500"
-                    data="http://www.youtube.com/embed/0Tns15wI1Rw">
-            </object>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-primary">History</h1>
-
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <p class="textStyle">Our vision is to be the world’s most loved health club.
-                        Since our first club opened in 1999 we have prided ourselves on delivering excellent customer
-                        service,
-                        and offering an innovative, value-for-money health club experience.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row backgroundgrey">
-        <div class="col-md-12">
-            <h1 class="text-primary"><b>Our Value</b></h1>
-        </div>
-        <div class="col-md-4">
-            <img class="icon" src="Pictures\light.png">
-
-            <h4 class="text-info">Education and lifelong learning</h4>
-
-            <p class="textStyle">Several studies suggest a positive link between taking part in sport and academic achievement.</p>
-        </div>
-        <div class="col-md-4">
-            <img class="icon" src="Pictures\light.png">
-            <h4 class="text-info">Crime reduction and community safety</h4>
-
-            <p  class="textStyle">Sport programmes aimed at youths at risk of criminal behaviour can
-                enhance self-esteem and reduce reoffending.</p>
-        </div>
-        <div class="col-md-4">
-            <img class="icon" src="Pictures\light.png">
-            <h4 class="text-info">Social capacity and cohesion</h4>
-
-            <p  class="textStyle">Sports programmes have the potential to strengthen social networks and community identity.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-primary">Gym Space</h1>
-
-            <div class="cycle-slideshow" data-cycle-speed="600" data-cycle-manual-speed="100">
-                <img class="ourspace" src="Pictures\gym-room-images\1.jpg">
-                <img class="ourspace" src="Pictures\gym-room-images\2.jpg">
-                <img class="ourspace" src="Pictures\gym-room-images\3.jpg">
-                <img class="ourspace" src="Pictures\gym-room-images\4.jpg">
-                <img class="ourspace" src="Pictures\gym-room-images\5.jpg">
-                <img class="ourspace" src="Pictures\gym-room-images\6.jpg">
-                <img class="ourspace" src="Pictures\gym-room-images\7.jpg">
-            </div>
-        </div>
-    </div>
-    <div class="row backgroundgrey">
-        <div class="col-md-12">
-            <h1 class="text-primary">Contact us</h1>
-        </div>
-        <div class="col-md-4">
-            <img class="icon" src="Pictures\phone.png"><br>
-
-            <p class="textStyle">
-                (+39) 324 123 456
-            </p>
-        </div>
-        <div class="col-md-4">
-            <img class="icon" src="Pictures\home.png">
-            <br>
-
-            <p class="textStyle">Via Riccardo Pitteri, 56
-                20134 Milano
-                Italy</p>
-        </div>
-        <div class="col-md-4">
-            <img class="icon" src="Pictures\E-mail.png"><br>
-
-            <p class="textStyle">contact@biggym.it</p>
-        </div>
-    </div>
-
+<!--
+<div style="height: 40px; width: 100%">
+    <div style="width: 50px; float:left"><a id="back_button" href="#" class="btn btn-info btn-md"><span
+            class="glyphicon glyphicon-arrow-left"></span></a></div>
+    <div style="float:right"><a id="forward_button" href="#" class="btn btn-info btn-md"><span
+            class="glyphicon glyphicon-arrow-right"></span></a></div>
 </div>
-
+-->
+<div id="page_content" class="container-fluid"></div>
+<div id="desktopTest" class="hidden-xs"></div>
 <footer>
     <p class="foot">Copyright for BigGym <br>Created by Ergun, Chen and Kaabi</p>
 </footer>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/ajax_loader.js"></script>
 <script src="assets/js/jquery.cycle2.min.js"></script>
 <script type="text/javascript">
-    $('.cycle-slideshow').cycle({
-        speed: 600,
-        manualSpeed: 100
-    });
+    getContent("our_gym");
 </script>
-
+<a href="#page_content" id="back-top"><i
+		class="fa fa-angle-up fa-3x"></i></a>
 </body>
 </html>
