@@ -1,5 +1,9 @@
 var $base_url = "http://localhost/cke/index.php/";
 var $base_url2 = "http://localhost/cke/";
+/*
+var $base_url = "http://www.cke.altervista.org/index.php/";
+var $base_url2 = "http://www.cke.altervista.org/";
+*/
 var ignore = true;
 function getContent(page_name) {
     $('#page_content').load($base_url2 + 'single_pages/' + page_name + '.html');
