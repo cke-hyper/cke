@@ -1,6 +1,6 @@
 <snippet>
-  <content><![CDATA[
-# ${1:Big Gym}
+  <content>
+# Big Gym
 
 This project is under the course of Hypermedia in Politecnico di Milano.
 The goal is to understand the basic web architecture by learning PHP, JavaScript, Ajax, HTML, MySql and PhoneGap.
@@ -24,6 +24,6 @@ DB file:			DB/Dump20150612.sql
 
 GNU General Public License
 
-]]></content>
+</content>
   <tabTrigger>readme</tabTrigger>
 </snippet>
