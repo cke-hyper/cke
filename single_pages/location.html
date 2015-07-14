@@ -73,21 +73,34 @@
     </script>
 
     <script>
-        var myCenter = new google.maps.LatLng(45.475324, 9.249217);
+        var myCenter = new google.maps.LatLng(0, 0);
+        var mapProp = {
+            center: myCenter,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
-            var mapProp = {
-                center: myCenter,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-            var marker = new google.maps.Marker({
-                position: myCenter
-            });
-
-            marker.setMap(map);
-
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        var marker = new google.maps.Marker({
+            position: myCenter,
+            map: map
+        });
+        $.ajax({
+            url: $base_url + "page/get_page/20",
+            data: {
+                format: 'json'
+            },
+            error: function (xhr, err) {
+            },
+            dataType: 'json',
+            success: function (data) {
+                lat = parseFloat(data.split(", ")[0]);
+                lng = parseFloat(data.split(", ")[1]);
+                pos = new google.maps.LatLng(lat, lng);
+                console.log(pos);
+                marker.setPosition(pos);
+                map.setCenter(pos);
+            }
+        });
     </script>
 </div>

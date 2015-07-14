@@ -23,7 +23,7 @@ class Page extends CI_Controller
         $data ['rows'] = $this->page_model->get_page($page_id);
         // $data ['cardinality'] = $this->teaches_1_model->get_all();
         foreach ($this->page_model->get_page($page_id) as $row) {
-            echo $row->page_content;
+            print json_encode($row->page_content);
         }
     }
 }
